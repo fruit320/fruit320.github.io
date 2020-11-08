@@ -172,7 +172,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-11-08 22:54:22 / Modified: 23:22:21" itemprop="dateCreated datePublished" datetime="2020-11-08T22:54:22+08:00">2020-11-08</time>
+              <time title="Created: 2020-11-08 22:54:22 / Modified: 23:29:03" itemprop="dateCreated datePublished" datetime="2020-11-08T22:54:22+08:00">2020-11-08</time>
             </span>
 
           
@@ -206,6 +206,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;android_server_x86</span><br></pre></td></tr></table></figure>
 
 <p>另开一个cmd.exe  输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb forward tcp:23946 tcp:23946</span><br></pre></td></tr></table></figure>
+
+<p>7）在ida中配置remote linux debugger</p>
+<p>127.0.0.1 23946</p>
+<p>点击debugger  –&gt; attach  to  process  –&gt;选择包名</p>
+<p>8）ctrl + s  转到对应模块找到断点函数  可以调试了</p>
 
       
     </div>
