@@ -27,17 +27,17 @@
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
 <meta property="og:description" content="我晚上十点才开始看(一周两次组会，导师的确好又大牛，但是我真的好忙啊啊啊，每周都要做点什么，然后又被push了)  来不及了 先装环境   mpi 以及openmpi  最后发现环境装不装无所谓  静态分析再加上单进程动调就行 mpi -np 13  的意思  就是十三个进程 mpi属于并行编程，没学过，完全mengb，被吓到了， 后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/华为杯鲲鹏场2020%20%20realword_mpi/image-20201227000414919.png">
-<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227001624024.png">
+<meta property="og:image" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227000414919.png">
+<meta property="og:image" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227001624024.png">
 <meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227001606088.png">
 <meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227002123591.png">
 <meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227002248882.png">
 <meta property="article:published_time" content="2020-12-26T15:54:06.726Z">
-<meta property="article:modified_time" content="2020-12-29T13:48:08.920Z">
+<meta property="article:modified_time" content="2020-12-29T13:55:38.900Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="wp-二进制">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/华为杯鲲鹏场2020%20%20realword_mpi/image-20201227000414919.png">
+<meta name="twitter:image" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227000414919.png">
 
 <link rel="canonical" href="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/">
 
@@ -187,7 +187,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 21:48:08" itemprop="dateModified" datetime="2020-12-29T21:48:08+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 21:55:38" itemprop="dateModified" datetime="2020-12-29T21:55:38+08:00">2020-12-29</time>
               </span>
 
           
@@ -207,11 +207,12 @@
 <p>mpi属于并行编程，没学过，完全mengb，被吓到了，</p>
 <p>后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法create_graph，</p>
 <p>逆向靠猜是没错，可是我这真啥也想不出来，所以就查了一些mpi函数，我猜应该是同步的吧 否则无解。</p>
-<img src="华为杯鲲鹏场2020  realword_mpi/image-20201227000414919.png" alt="image-20201227000414919" style="zoom:50%;" />
+<img src="image-20201227000414919.png" alt="image-20201227000414919" style="zoom:50%;" />
 
 <p>看一开始sub_55874fe057a0 是个输出十三个数  0-13 ，顺序和输入有关，先不管具体算法 只看输入输出  只需要知道到底顺序是啥</p>
 <p>往下走 做了个create_graph 然后又从那里MPI_Neighbor_allgather，我查了一下官网函数解析，最后解析出这样：</p>
-<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227001624024.png" alt="image-20201227001624024"></p>
+<img src="image-20201227001624024.png" alt="image-20201227001624024" style="zoom:50%;" />
+
 <p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227001606088.png" alt="image-20201227001606088"></p>
 <p>MPI_Dist_graph_create，就是创建图13个进程  13个节点，没有权重，但有邻居，所以邻居长啥样，我们看下图</p>
 <p>MPI_Neighbor_allgather：应该是向自己邻居发消息收消息，sendbuf，recvbuf</p>
@@ -241,10 +242,7 @@
     <a href="/2020/12/08/inline%20hook%E5%AD%A6%E4%B9%A0/" rel="prev" title="inline hook 学习">
       <i class="fa fa-chevron-left"></i> inline hook 学习
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/27/%E5%8D%8E%E4%B8%BA%E6%9D%AF%20%E9%B8%BF%E8%92%99%E5%9C%BA2020%20re123_wp/" rel="next" title="华为杯鸿蒙场2020 re123 wp">
-      华为杯鸿蒙场2020 re123 wp <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -318,7 +316,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
