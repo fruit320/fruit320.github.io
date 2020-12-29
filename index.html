@@ -236,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 21:35:12" itemprop="dateModified" datetime="2020-12-29T21:35:12+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 21:48:08" itemprop="dateModified" datetime="2020-12-29T21:48:08+08:00">2020-12-29</time>
               </span>
 
           
@@ -256,7 +256,7 @@
 <p>mpi属于并行编程，没学过，完全mengb，被吓到了，</p>
 <p>后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法create_graph，</p>
 <p>逆向靠猜是没错，可是我这真啥也想不出来，所以就查了一些mpi函数，我猜应该是同步的吧 否则无解。</p>
-<img src="F:\themes\blog\source\images\image-20201227000414919.png" alt="image-20201227000414919" style="zoom:50%;" />
+<img src="华为杯鲲鹏场2020  realword_mpi/image-20201227000414919.png" alt="image-20201227000414919" style="zoom:50%;" />
 
 <p>看一开始sub_55874fe057a0 是个输出十三个数  0-13 ，顺序和输入有关，先不管具体算法 只看输入输出  只需要知道到底顺序是啥</p>
 <p>往下走 做了个create_graph 然后又从那里MPI_Neighbor_allgather，我查了一下官网函数解析，最后解析出这样：</p>
