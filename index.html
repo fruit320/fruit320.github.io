@@ -178,7 +178,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-29 21:59:27" itemprop="dateModified" datetime="2020-12-29T21:59:27+08:00">2020-12-29</time>
+                <time title="Modified: 2020-12-29 22:05:54" itemprop="dateModified" datetime="2020-12-29T22:05:54+08:00">2020-12-29</time>
               </span>
 
           
@@ -204,10 +204,10 @@
 <p>往下走 做了个create_graph 然后又从那里MPI_Neighbor_allgather，我查了一下官网函数解析，最后解析出这样：</p>
 <img src="./image-20201227001624024.png" alt="image-20201227001624024" style="zoom:50%;" />
 
-<p>![image-20201227001606088](华为杯鲲鹏场2020  realword_mpi/image-20201227001606088-1609250361139.png)</p>
+<p><img src="image-20201227001606088-1609250361139.png" alt="image-20201227001606088"></p>
 <p>MPI_Dist_graph_create，就是创建图13个进程  13个节点，没有权重，但有邻居，所以邻居长啥样，我们看下图</p>
 <p>MPI_Neighbor_allgather：应该是向自己邻居发消息收消息，sendbuf，recvbuf</p>
-<img src="华为杯鲲鹏场2020  realword_mpi/image-20201227002123591.png" alt="image-20201227002123591" style="zoom:50%;" />
+<img src="image-20201227002123591.png" alt="image-20201227002123591" style="zoom:50%;" />
 
 <p>这大概就是邻居了，degree表示有几个邻居</p>
 <p>后面就直接congratulation了，也就是说里面一个算法 ，逆出来就完了，关键算法在这</p>
