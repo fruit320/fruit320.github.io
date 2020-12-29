@@ -20,20 +20,26 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="ida7.0 + 夜神模拟器动态调试apk准备工作1）夜神模拟器 2）adb 下载  及环境变量配置 3）ida7.0准备 步骤1）apk是一个zip文件  改成后缀.zip   查看.so 文件  下面介绍如何调试.so文件 2）ida打开  打开夜神模拟器 一般都是x86架构的模拟器  下面指令可以查看模拟器架构 1adb shell getprop ro.product.cpu.abi  3">
+  <meta name="description" content="我晚上十点才开始看(一周两次组会，导师的确好又大牛，但是我真的好忙啊啊啊，每周都要做点什么，然后又被push了)  来不及了 先装环境   mpi 以及openmpi  最后发现环境装不装无所谓  静态分析再加上单进程动调就行 mpi -np 13  的意思  就是十三个进程 mpi属于并行编程，没学过，完全mengb，被吓到了， 后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ida7.0 + 夜神模拟器动态调试apk">
-<meta property="og:url" content="http://example.com/2020/11/08/ida7.0%20+%20%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk/index.html">
+<meta property="og:title" content="华为杯鲲鹏场2020 realword_mpi wp">
+<meta property="og:url" content="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="ida7.0 + 夜神模拟器动态调试apk准备工作1）夜神模拟器 2）adb 下载  及环境变量配置 3）ida7.0准备 步骤1）apk是一个zip文件  改成后缀.zip   查看.so 文件  下面介绍如何调试.so文件 2）ida打开  打开夜神模拟器 一般都是x86架构的模拟器  下面指令可以查看模拟器架构 1adb shell getprop ro.product.cpu.abi  3">
+<meta property="og:description" content="我晚上十点才开始看(一周两次组会，导师的确好又大牛，但是我真的好忙啊啊啊，每周都要做点什么，然后又被push了)  来不及了 先装环境   mpi 以及openmpi  最后发现环境装不装无所谓  静态分析再加上单进程动调就行 mpi -np 13  的意思  就是十三个进程 mpi属于并行编程，没学过，完全mengb，被吓到了， 后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-11-08T14:54:22.347Z">
-<meta property="article:modified_time" content="2020-11-16T15:03:24.468Z">
+<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227000414919.png">
+<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227001624024.png">
+<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227001606088.png">
+<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227002123591.png">
+<meta property="og:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227002248882.png">
+<meta property="article:published_time" content="2020-12-26T15:54:06.726Z">
+<meta property="article:modified_time" content="2020-12-27T05:29:30.520Z">
 <meta property="article:author" content="fruit">
-<meta property="article:tag" content="必备技能。">
+<meta property="article:tag" content="wp-二进制">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/rookiedragon/AppData/Roaming/Typora/typora-user-images/image-20201227000414919.png">
 
-<link rel="canonical" href="http://example.com/2020/11/08/ida7.0%20+%20%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk/">
+<link rel="canonical" href="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/">
 
 
 <script id="page-configurations">
@@ -46,7 +52,7 @@
   };
 </script>
 
-  <title>ida7.0 + 夜神模拟器动态调试apk | Fruit's Blogs</title>
+  <title>华为杯鲲鹏场2020 realword_mpi wp | Fruit's Blogs</title>
   
 
 
@@ -151,7 +157,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/08/ida7.0%20+%20%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
@@ -164,7 +170,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          ida7.0 + 夜神模拟器动态调试apk
+          华为杯鲲鹏场2020 realword_mpi wp
         </h1>
 
         <div class="post-meta">
@@ -174,14 +180,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2020-11-08 22:54:22" itemprop="dateCreated datePublished" datetime="2020-11-08T22:54:22+08:00">2020-11-08</time>
+              <time title="Created: 2020-12-26 23:54:06" itemprop="dateCreated datePublished" datetime="2020-12-26T23:54:06+08:00">2020-12-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-16 23:03:24" itemprop="dateModified" datetime="2020-11-16T23:03:24+08:00">2020-11-16</time>
+                <time title="Modified: 2020-12-27 13:29:30" itemprop="dateModified" datetime="2020-12-27T13:29:30+08:00">2020-12-27</time>
               </span>
 
           
@@ -195,35 +201,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ida7-0-夜神模拟器动态调试apk"><a href="#ida7-0-夜神模拟器动态调试apk" class="headerlink" title="ida7.0 + 夜神模拟器动态调试apk"></a>ida7.0 + 夜神模拟器动态调试apk</h1><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>1）夜神模拟器</p>
-<p>2）adb 下载  及环境变量配置</p>
-<p>3）ida7.0准备</p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><p>1）apk是一个zip文件  改成后缀.zip   查看.so 文件  下面介绍如何调试.so文件</p>
-<p>2）ida打开  打开夜神模拟器</p>
-<p>一般都是x86架构的模拟器 </p>
-<p>下面指令可以查看模拟器架构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell getprop ro.product.cpu.abi</span><br></pre></td></tr></table></figure>
-
-<p>3）找到ida中的ida  android_server_x86  android_server 等文件</p>
-<p>4）打开cmd.exe 输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb connect 127.0.0.1:62001</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push xxxxx   &#x2F;data&#x2F;local&#x2F;tmp</span><br><span class="line">adb shell  #进入shell</span><br><span class="line">su   #切换到root模式</span><br><span class="line">cd &#x2F;data&#x2F;local&#x2F;tmp</span><br><span class="line">chomd 777 xxxx #赋值权限</span><br></pre></td></tr></table></figure>
-
-<p>5）模拟器安装apk   并打开</p>
-<p>6）在shell中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;android_server_x86</span><br></pre></td></tr></table></figure>
-
-<p>另开一个cmd.exe  输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb forward tcp:23946 tcp:23946</span><br></pre></td></tr></table></figure>
-
-<p>7）在ida中配置remote linux debugger</p>
-<p>127.0.0.1 23946</p>
-<p>点击debugger  –&gt; attach  to  process  –&gt;选择包名</p>
-<p>8）ctrl + s  转到对应模块找到断点函数  可以调试了</p>
-<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>后面打算出一篇真机调试    这样调试arm会比较方便。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>1）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38677814/article/details/94835852">https://blog.csdn.net/qq_38677814/article/details/94835852</a></p>
-<p>2）<a target="_blank" rel="noopener" href="https://www.dllhook.com/post/208.html">https://www.dllhook.com/post/208.html</a></p>
+        <p>我晚上十点才开始看(一周两次组会，导师的确好又大牛，但是我真的好忙啊啊啊，每周都要做点什么，然后又被push了)  来不及了 先装环境   mpi 以及openmpi </p>
+<p>最后发现环境装不装无所谓  静态分析再加上单进程动调就行</p>
+<p>mpi -np 13  的意思  就是十三个进程</p>
+<p>mpi属于并行编程，没学过，完全mengb，被吓到了，</p>
+<p>后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法create_graph，</p>
+<p>逆向靠猜是没错，可是我这真啥也想不出来，所以就查了一些mpi函数，我猜应该是同步的吧 否则无解。</p>
+<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227000414919.png" alt="image-20201227000414919"></p>
+<p>看一开始sub_55874fe057a0 是个输出十三个数  0-13 ，顺序和输入有关，先不管具体算法 只看输入输出  只需要知道到底顺序是啥</p>
+<p>往下走 做了个create_graph 然后又从那里MPI_Neighbor_allgather，我查了一下官网函数解析，最后解析出这样：</p>
+<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227001624024.png" alt="image-20201227001624024"></p>
+<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227001606088.png" alt="image-20201227001606088"></p>
+<p>MPI_Dist_graph_create，就是创建图13个进程  13个节点，没有权重，但有邻居，所以邻居长啥样，我们看下图</p>
+<p>MPI_Neighbor_allgather：应该是向自己邻居发消息收消息，sendbuf，recvbuf</p>
+<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227002123591.png" alt="image-20201227002123591"></p>
+<p>这大概就是邻居了，degree表示有几个邻居</p>
+<p>后面就直接congratulation了，也就是说里面一个算法 ，逆出来就完了，关键算法在这</p>
+<p><img src="C:\Users\rookiedragon\AppData\Roaming\Typora\typora-user-images\image-20201227002248882.png" alt="image-20201227002248882"></p>
+<p>用草稿纸模拟了一下  后来觉得应该是hamilton 回路，所以写代码就好了</p>
 
     </div>
 
@@ -233,7 +228,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%BF%85%E5%A4%87%E6%8A%80%E8%83%BD%E3%80%82/" rel="tag"># 必备技能。</a>
+              <a href="/tags/wp-%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># wp-二进制</a>
           </div>
 
         
@@ -242,12 +237,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/02/%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/" rel="prev" title="工具集合">
-      <i class="fa fa-chevron-left"></i> 工具集合
+    <a href="/2020/12/08/inline%20hook%E5%AD%A6%E4%B9%A0/" rel="prev" title="inline hook 学习">
+      <i class="fa fa-chevron-left"></i> inline hook 学习
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/11/09/%E5%8F%8D%E7%BC%96%E8%AF%91python%E6%89%93%E5%8C%85exe/" rel="next" title="反编译  python打包的exe">
-      反编译  python打包的exe <i class="fa fa-chevron-right"></i>
+    <a href="/2020/12/27/winhex%E5%A2%9E%E5%8A%A0%E5%AD%97%E8%8A%82/" rel="next" title="winhex增加字节">
+      winhex增加字节 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -307,7 +302,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ida7-0-%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk"><span class="nav-number">1.</span> <span class="nav-text">ida7.0 + 夜神模拟器动态调试apk</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">1.0.0.3.</span> <span class="nav-text">结语</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.0.0.4.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
