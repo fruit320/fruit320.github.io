@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="问灵十三载，等一不归人">
+  <meta name="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fruit&#39;s Blogs">
 <meta property="og:url" content="http://example.com/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="问灵十三载，等一不归人">
+<meta property="og:description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="fruit">
 <meta name="twitter:card" content="summary">
@@ -148,12 +148,109 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/leetcode239%20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/02/leetcode239%20/" class="post-title-link" itemprop="url">leetcode 239 滑动窗口最大值</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-02 23:08:38" itemprop="dateCreated datePublished" datetime="2021-01-02T23:08:38+08:00">2021-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-03 13:35:25" itemprop="dateModified" datetime="2021-01-03T13:35:25+08:00">2021-01-03</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>不会优化 ，不记得优先队列了，所以想不出来优化点</p>
+<p>方法一（利用优先队列进行优化）</p>
+<p>这里求最大值可以用优先队列进行优化</p>
+<p>出入队列复杂度为logn</p>
+<table>
+<thead>
+<tr>
+<th>底层机构</th>
+<th>入队</th>
+<th>出队（拿出最大元素）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>普通线性结构</td>
+<td>O(1)</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>顺序线性结构</td>
+<td>O(n)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>堆</td>
+<td>O(logn)</td>
+<td>O(logn)</td>
+</tr>
+</tbody></table>
+<p>利用优先队列，进行优化   O(nlogn)</p>
+<p>方法二</p>
+<p>利用双向队列进行优化，可以同时弹出队首和队尾</p>
+<p>当滑动窗口向右移动时，我们需要把一个新的元素放入队列中。为了保持队列的性质，我们会不断地将新的元素与队尾的元素相比较，如果前者大于等于后者，那么队尾的元素就可以被永久地移除，我们将其弹出队列。我们需要不断地进行此项操作，直到队列为空或者新的元素小于队尾的元素。</p>
+<p>视频解析：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/">https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -218,7 +315,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -290,7 +387,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -379,7 +476,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -448,7 +545,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -519,7 +616,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -580,7 +677,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -646,7 +743,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -717,7 +814,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
       <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -801,88 +898,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/02/%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/02/%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">工具集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-02 22:51:28" itemprop="dateCreated datePublished" datetime="2020-11-02T22:51:28+08:00">2020-11-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-16 23:02:26" itemprop="dateModified" datetime="2020-11-16T23:02:26+08:00">2020-11-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ctf-工具（持续更新）"><a href="#ctf-工具（持续更新）" class="headerlink" title="ctf  工具（持续更新）"></a>ctf  工具（持续更新）</h2><h5 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h5><p>1） ida /  OD  /  Windbg（一般调试驱动吧。） / X64dbg</p>
-<p>2） resource hacker  （一般mfc用  找控件ID）</p>
-<p>3）cheat engine </p>
-<p>4） DIE   （查二进制文件的位数之类的，有无壳）</p>
-<h5 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h5><p>1）advanced archive password recovery(zip 爆破  windows)</p>
-<p>2）aircrack-ng  无线流量包分析  </p>
-<p>3）一个密码生成的小工具 crunch（kali linux自带)</p>
-<p>4）winhex   必备。。</p>
-<p>misc还是推荐kali吧 自带一堆工具 免去安装中的各种问题</p>
-<h5 id="web"><a href="#web" class="headerlink" title="web"></a>web</h5><ol>
-<li><p>  burpsuite</p>
-</li>
-<li><p>  菜刀</p>
-</li>
-</ol>
-<h5 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h5><p>1）pwntools 不用说了吧   </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -942,14 +962,14 @@
     <img class="site-author-image" itemprop="image" alt="fruit"
       src="/images/violin.jpg">
   <p class="site-author-name" itemprop="name">fruit</p>
-  <div class="site-description" itemprop="description">问灵十三载，等一不归人</div>
+  <div class="site-description" itemprop="description">问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
