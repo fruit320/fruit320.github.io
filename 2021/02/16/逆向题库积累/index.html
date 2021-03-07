@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，最终汇总，慢慢的积少成多。 2020justctf—–debug_me_if_you_can-RE 涉及到高级反调试技术  ptrace用法  以及 idapython脚本编写与使用 详细wp:https:&#x2F;&#x2F;mrt4ntr4.github.io&#x2F;JustCTF-debugme&#x2F;#Role-of-Father-Process 2020第五空间">
+  <meta name="description" content="如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。 2020justctf—–debug_me_if_you_can-RE涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用 详细wp:https:&#x2F;&#x2F;mrt4ntr4.github.io&#x2F;JustCTF-debugme&#x2F;#Role-of-Father-Proc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="逆向题积累">
 <meta property="og:url" content="http://example.com/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，最终汇总，慢慢的积少成多。 2020justctf—–debug_me_if_you_can-RE 涉及到高级反调试技术  ptrace用法  以及 idapython脚本编写与使用 详细wp:https:&#x2F;&#x2F;mrt4ntr4.github.io&#x2F;JustCTF-debugme&#x2F;#Role-of-Father-Process 2020第五空间">
+<meta property="og:description" content="如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。 2020justctf—–debug_me_if_you_can-RE涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用 详细wp:https:&#x2F;&#x2F;mrt4ntr4.github.io&#x2F;JustCTF-debugme&#x2F;#Role-of-Father-Proc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-16T05:09:47.348Z">
-<meta property="article:modified_time" content="2021-02-28T13:50:34.474Z">
+<meta property="article:modified_time" content="2021-03-07T15:40:44.425Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-28 21:50:34" itemprop="dateModified" datetime="2021-02-28T21:50:34+08:00">2021-02-28</time>
+                <time title="Modified: 2021-03-07 23:40:44" itemprop="dateModified" datetime="2021-03-07T23:40:44+08:00">2021-03-07</time>
               </span>
 
           
@@ -203,11 +203,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，最终汇总，慢慢的积少成多。</p>
-<p>2020justctf—–debug_me_if_you_can-RE</p>
-<p>涉及到高级反调试技术  ptrace用法  以及 idapython脚本编写与使用</p>
+        <p>如果一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。</p>
+<h5 id="2020justctf—–debug-me-if-you-can-RE"><a href="#2020justctf—–debug-me-if-you-can-RE" class="headerlink" title="2020justctf—–debug_me_if_you_can-RE"></a>2020justctf—–debug_me_if_you_can-RE</h5><p>涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用</p>
 <p>详细wp:<a target="_blank" rel="noopener" href="https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process">https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process</a></p>
-<p>2020第五空间—-</p>
+<h5 id="2020第五空间—-ManageCode"><a href="#2020第五空间—-ManageCode" class="headerlink" title="2020第五空间—-ManageCode"></a>2020第五空间—-ManageCode</h5><p>c#  根据dnspy偏移信息在ida中找到关键位置  并进行逆向</p>
+<h5 id="2020dragonctf—-RetroZeit"><a href="#2020dragonctf—-RetroZeit" class="headerlink" title="2020dragonctf—-RetroZeit"></a>2020dragonctf—-RetroZeit</h5><p>新平台下的逆向  用grida看的   其实算法很简单 感觉考察的还是快速学习能力和读汇编能力</p>
+<p>逆向用到mc680000指令集</p>
+<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-88912.htm">https://bbs.pediy.com/thread-88912.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf">https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf</a></p>
+<h5 id="go语言逆向"><a href="#go语言逆向" class="headerlink" title="go语言逆向"></a>go语言逆向</h5><p>很多题都是用go语言写的 ，github有个脚本加载一下，后面逆向就和原来差不多，具体题目就没记录。</p>
+<h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
+<p>安卓和mips的逆向还需多加练习（未带完善）</p>
 
     </div>
 
@@ -291,6 +297,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#2020justctf%E2%80%94%E2%80%93debug-me-if-you-can-RE"><span class="nav-number">1.</span> <span class="nav-text">2020justctf—–debug_me_if_you_can-RE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020%E7%AC%AC%E4%BA%94%E7%A9%BA%E9%97%B4%E2%80%94-ManageCode"><span class="nav-number">2.</span> <span class="nav-text">2020第五空间—-ManageCode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020dragonctf%E2%80%94-RetroZeit"><span class="nav-number">3.</span> <span class="nav-text">2020dragonctf—-RetroZeit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#go%E8%AF%AD%E8%A8%80%E9%80%86%E5%90%91"><span class="nav-number">4.</span> <span class="nav-text">go语言逆向</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2020%E5%BC%BA%E7%BD%91%E6%9D%AF%E2%80%94-xx-warmup-obf"><span class="nav-number">5.</span> <span class="nav-text">2020强网杯—-xx_warmup_obf</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -306,7 +313,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
