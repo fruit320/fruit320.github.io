@@ -29,7 +29,7 @@
 <meta property="og:description" content="一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。 2020justctf—–debug_me_if_you_can-RE涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用 详细wp:https:&#x2F;&#x2F;mrt4ntr4.github.io&#x2F;JustCTF-debugme&#x2F;#Role-of-Father-Proces">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-16T05:09:47.348Z">
-<meta property="article:modified_time" content="2021-04-03T16:14:57.183Z">
+<meta property="article:modified_time" content="2021-04-05T14:47:26.008Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-04 00:14:57" itemprop="dateModified" datetime="2021-04-04T00:14:57+08:00">2021-04-04</time>
+                <time title="Modified: 2021-04-05 22:47:26" itemprop="dateModified" datetime="2021-04-05T22:47:26+08:00">2021-04-05</time>
               </span>
 
           
@@ -215,11 +215,11 @@
 <h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
 <p>安卓和mips的逆向还需多加练习（未带完善）</p>
 <h5 id="mips逆向及环境搭建"><a href="#mips逆向及环境搭建" class="headerlink" title="mips逆向及环境搭建"></a>mips逆向及环境搭建</h5><p>qemu是个神器</p>
-<p>里面有各种架构的模拟  arm mips </p>
-<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的</p>
+<p>里面有各种架构的模拟  arm mips riscv</p>
+<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的可执行文件</p>
 <p>-g 参数绑定端口</p>
-<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个）</p>
-<p>ida 7.5 可以直接动态调试</p>
+<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个，但需要下载mips-linux-gnu）</p>
+<p>ida 7.5 可以直接动态调试  万能的f5</p>
 <p>qemu-mips-static -L /usr/mips-linux-gnu/ -g 12345 re</p>
 
     </div>

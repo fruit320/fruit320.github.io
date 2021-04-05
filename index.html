@@ -179,7 +179,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:22:20" itemprop="dateModified" datetime="2021-04-05T22:22:20+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-05 22:51:13" itemprop="dateModified" datetime="2021-04-05T22:51:13+08:00">2021-04-05</time>
               </span>
 
           
@@ -193,7 +193,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <p>z</p>
+<p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
+<p>这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server)</p>
+<p>做个简单的小实验深入理解一下plt和got表</p>
+<p>gcc test -o test.out</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">void win()&#123;</span><br><span class="line">    printf(&quot;you win\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char a[100];</span><br><span class="line">    gets(a);</span><br><span class="line">    printf(&quot;you lose\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后面再写 。。</p>
+
       
     </div>
 
@@ -243,7 +251,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-04 00:12:49" itemprop="dateModified" datetime="2021-04-04T00:12:49+08:00">2021-04-04</time>
+                <time title="Modified: 2021-04-05 22:29:31" itemprop="dateModified" datetime="2021-04-05T22:29:31+08:00">2021-04-05</time>
               </span>
 
           
@@ -262,6 +270,7 @@
 <p>构造exp时，公式如下：</p>
 <p>shellcode = padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数</p>
 <h6 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h6><p>在x64中，由于linux x64传参首先是通过相关寄存器，而不是直接通过栈传参，所以在构造exp时只需要找到需要的gadget即可    一般来说，shellcode = padding + 跳转地址 + xxxx （参数）+ 返回地址</p>
+<p>xman里面的level0-level5都挺有意思的（从一开始有后门 再到libc 无libc的漏洞。。。）  目前都刷过了， 一步步进阶中</p>
 <h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5>
       
     </div>
@@ -312,7 +321,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-04 00:14:57" itemprop="dateModified" datetime="2021-04-04T00:14:57+08:00">2021-04-04</time>
+                <time title="Modified: 2021-04-05 22:47:26" itemprop="dateModified" datetime="2021-04-05T22:47:26+08:00">2021-04-05</time>
               </span>
 
           
@@ -338,11 +347,11 @@
 <h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
 <p>安卓和mips的逆向还需多加练习（未带完善）</p>
 <h5 id="mips逆向及环境搭建"><a href="#mips逆向及环境搭建" class="headerlink" title="mips逆向及环境搭建"></a>mips逆向及环境搭建</h5><p>qemu是个神器</p>
-<p>里面有各种架构的模拟  arm mips </p>
-<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的</p>
+<p>里面有各种架构的模拟  arm mips riscv</p>
+<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的可执行文件</p>
 <p>-g 参数绑定端口</p>
-<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个）</p>
-<p>ida 7.5 可以直接动态调试</p>
+<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个，但需要下载mips-linux-gnu）</p>
+<p>ida 7.5 可以直接动态调试  万能的f5</p>
 <p>qemu-mips-static -L /usr/mips-linux-gnu/ -g 12345 re</p>
 
       
@@ -465,10 +474,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-01-10 23:42:59 / Modified: 23:58:44" itemprop="dateCreated datePublished" datetime="2021-01-10T23:42:59+08:00">2021-01-10</time>
+              <time title="Created: 2021-01-10 23:42:59" itemprop="dateCreated datePublished" datetime="2021-01-10T23:42:59+08:00">2021-01-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 22:48:02" itemprop="dateModified" datetime="2021-04-05T22:48:02+08:00">2021-04-05</time>
+              </span>
 
           
 
@@ -481,21 +496,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="最近的学习"><a href="#最近的学习" class="headerlink" title="最近的学习"></a>最近的学习</h3><p>每日一题leetcode  会写感悟和技巧</p>
+          <h3 id="最近的学习"><a href="#最近的学习" class="headerlink" title="最近的学习"></a>最近的学习</h3><p>每日一题leetcode  会写感悟和技巧（和师兄还有同届的同学交流一下，目前leetcode不怎么刷了 ，还是冲二进制岗位吧。。朋友是说，刷leetcode分散精力，人的精力是有限的，最好专注一个，嗯，我觉得确实。。。）</p>
 <p>最近一直看一些视频  补充基础  我等着视频看完了  会手写进行ctf训练。</p>
 <h3 id="关于ctf"><a href="#关于ctf" class="headerlink" title="关于ctf"></a>关于ctf</h3><p>要求1：逆向有些题型还不会  尤其是安卓 和mips</p>
 <p>其实x86的回看以后  其他的需要照着指令集  基本都是一个套路</p>
-<p>定位到关键点  好好读  耐心点。 </p>
-<p>要求2：会pwn的签到  （太难的估计学不下来）栈溢出会一些  堆目前不会</p>
-<p>（web就算了  web 没有开发那一套我理解不透彻 估计没得玩  而且我的确学二进制更快一些。）</p>
-<h3 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h3><p>是要学着手写一些。。  </p>
+<p>定位到关键点  好好读  耐心点。 （mips  ida7.5 环境搭好  就完事了  arm一样可以f5  可能就是mips和arm对应的指令集不熟练  我猜今年题是不是都会出riscv架构的  毕竟mips老大说不玩了。。）</p>
+<p>要求2：会pwn的签到  （太难的估计学不下来，一定学的下来  冲丫）栈溢出会一些  堆目前不会</p>
+<p>pwn在刷栈题  补堆的基础   目前堆看了一半，得慢慢啃，一遍一遍地啃   长亭科技和angelboy都有堆的视频  学习中</p>
+<p>（web就算了  web 没有开发那一套我理解不透彻  只能做个脚本小子  估计没得玩  而且我的确学二进制更快一些。）</p>
+<h3 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h3><p>是要学着手写一些。。  有个小项目  一直没写懒  没空。。。有空的时候都看pwn了。。。</p>
 <h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>我觉得我现在啃源码的功力还可以  亟待提升  可以啃啃</p>
 <p>一般是看大体架构 然后啃细节</p>
+<h3 id="新的任务"><a href="#新的任务" class="headerlink" title="新的任务"></a>新的任务</h3><p>就我目前的水平，一般应对大赛ctf的逆向中等题以上的水平，二十以上能出的我基本也可以，十解以内就够呛了，   如果再深入 一个是刷题能提升 不过实战感觉就是内核和游戏逆向   不太懂 现在恶意代码不都是玩沙箱吗？？？</p>
+<p>对了idapython 我也写不太好  但不知道如何提升。。。。（看idapython手册？？？ida7.5的又有变动）</p>
+<p>但是目前打算做pwn题  如果能打进线下赛 做pwn题最好了  毕竟逆向线下没人疼没人爱</p>
+<p>要引入实战方面  </p>
+<p>一个打算做安卓或iot的网络协议的分析实战（分析一两个就够了吧）</p>
+<p>一个是复现iot漏洞和近期比较大的漏洞 比如之前linux那个超级提权堆溢出漏洞。。（看了原理还没复现）</p>
+<p>这实战方面打算在五月份启动 马上jarvisoj就快刷完了  然后就是kw的低分题</p>
 <h3 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h3><p>代码编写的技巧亟待提升 </p>
-<p>毕竟安全岗位太少了    我去安全开发的概率大一些。。</p>
+<p>毕竟安全岗位太少了    我去安全开发的概率大一些。。（那是之前的犹豫不定）</p>
 <p>而且算法和数据结构真的挺重要</p>
 <p>我一直觉得安全和开发不分家。</p>
 <p>每日一题训练中</p>
+<p>目前不刷了</p>
 
       
     </div>
@@ -853,7 +877,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-30 21:52:11" itemprop="dateModified" datetime="2020-12-30T21:52:11+08:00">2020-12-30</time>
+                <time title="Modified: 2021-04-05 22:48:28" itemprop="dateModified" datetime="2021-04-05T22:48:28+08:00">2021-04-05</time>
               </span>
 
           
@@ -890,7 +914,7 @@
 <img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227002248882.png" class title="4image">
 
 <p>用草稿纸模拟了一下  后来觉得应该是hamilton 回路，所以写代码就好了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">mport math</span><br><span class="line">import networkx as nx</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">def hamilton(G):</span><br><span class="line">    F &#x3D; [(G,[list(G.nodes())[0]])]</span><br><span class="line">    n &#x3D; G.number_of_nodes()</span><br><span class="line">    while F:</span><br><span class="line">        graph,path &#x3D; F.pop()</span><br><span class="line">        confs &#x3D; []</span><br><span class="line">        neighbors &#x3D; (node for node in G.neighbors(path[-1])#graph</span><br><span class="line">                     if node !&#x3D; path[-1]) #exclude self loops</span><br><span class="line">        for neighbor in neighbors:</span><br><span class="line">            conf_p &#x3D; path[:]</span><br><span class="line">            conf_p.append(neighbor)</span><br><span class="line">            if neighbor &#x3D;&#x3D; &#39;t&#39;:</span><br><span class="line">                if len(conf_p)&#x3D;&#x3D;14:</span><br><span class="line">                    print(conf_p)</span><br><span class="line">                break</span><br><span class="line">            conf_g &#x3D; nx.Graph(graph)</span><br><span class="line">            try:</span><br><span class="line">                conf_g.remove_node(path[-1])</span><br><span class="line">            except Exception as e:</span><br><span class="line">                print(str(e))</span><br><span class="line">            confs.append((conf_g,conf_p))</span><br><span class="line">        for g,p in confs:</span><br><span class="line">            if len(p)&#x3D;&#x3D;14:</span><br><span class="line">                print(p)</span><br><span class="line">                continue#return p</span><br><span class="line">            else:</span><br><span class="line">                F.append((g,p))</span><br><span class="line">    return []</span><br><span class="line"></span><br><span class="line">nodes&#x3D;list(range(13))</span><br><span class="line">G&#x3D;nx.DiGraph()</span><br><span class="line">G.add_nodes_from(nodes)</span><br><span class="line"></span><br><span class="line">dests&#x3D;[[9,5,0xB,0xC],</span><br><span class="line">[8,7,2,5,3],</span><br><span class="line">[9,0xB,6],</span><br><span class="line">[6,0xA],</span><br><span class="line">[3,7],</span><br><span class="line">[4,7,0xA,8],</span><br><span class="line">[9],</span><br><span class="line">[9,3,6],</span><br><span class="line">[9,2,4],</span><br><span class="line">[0],</span><br><span class="line">[9,6],</span><br><span class="line">[7,4,9],</span><br><span class="line">[5,7,0xB,1]]</span><br><span class="line"></span><br><span class="line">for i in range(13):</span><br><span class="line">    for t in dests[i]:</span><br><span class="line">        G.add_edge(i,t)</span><br><span class="line"></span><br><span class="line">#将哈密尔顿圈问题转化为哈密尔顿路问题</span><br><span class="line">G.remove_edge(9,0)</span><br><span class="line">G.add_node(&#39;t&#39;)</span><br><span class="line">G.add_edge(9,&#39;t&#39;)</span><br><span class="line">G.add_edge(&#39;t&#39;,0)</span><br><span class="line"></span><br><span class="line">tmep&#x3D;list(range(13))</span><br><span class="line">result &#x3D; hamilton(G)[1:-1]+[0]</span><br><span class="line">x&#x3D;0</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">import networkx as nx</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">def hamilton(G):</span><br><span class="line">    F &#x3D; [(G,[list(G.nodes())[0]])]</span><br><span class="line">    n &#x3D; G.number_of_nodes()</span><br><span class="line">    while F:</span><br><span class="line">        graph,path &#x3D; F.pop()</span><br><span class="line">        confs &#x3D; []</span><br><span class="line">        neighbors &#x3D; (node for node in G.neighbors(path[-1])#graph</span><br><span class="line">                     if node !&#x3D; path[-1]) #exclude self loops</span><br><span class="line">        for neighbor in neighbors:</span><br><span class="line">            conf_p &#x3D; path[:]</span><br><span class="line">            conf_p.append(neighbor)</span><br><span class="line">            if neighbor &#x3D;&#x3D; &#39;t&#39;:</span><br><span class="line">                if len(conf_p)&#x3D;&#x3D;14:</span><br><span class="line">                    print(conf_p)</span><br><span class="line">                break</span><br><span class="line">            conf_g &#x3D; nx.Graph(graph)</span><br><span class="line">            try:</span><br><span class="line">                conf_g.remove_node(path[-1])</span><br><span class="line">            except Exception as e:</span><br><span class="line">                print(str(e))</span><br><span class="line">            confs.append((conf_g,conf_p))</span><br><span class="line">        for g,p in confs:</span><br><span class="line">            if len(p)&#x3D;&#x3D;14:</span><br><span class="line">                print(p)</span><br><span class="line">                continue#return p</span><br><span class="line">            else:</span><br><span class="line">                F.append((g,p))</span><br><span class="line">    return []</span><br><span class="line"></span><br><span class="line">nodes&#x3D;list(range(13))</span><br><span class="line">G&#x3D;nx.DiGraph()</span><br><span class="line">G.add_nodes_from(nodes)</span><br><span class="line"></span><br><span class="line">dests&#x3D;[[9,5,0xB,0xC],</span><br><span class="line">[8,7,2,5,3],</span><br><span class="line">[9,0xB,6],</span><br><span class="line">[6,0xA],</span><br><span class="line">[3,7],</span><br><span class="line">[4,7,0xA,8],</span><br><span class="line">[9],</span><br><span class="line">[9,3,6],</span><br><span class="line">[9,2,4],</span><br><span class="line">[0],</span><br><span class="line">[9,6],</span><br><span class="line">[7,4,9],</span><br><span class="line">[5,7,0xB,1]]</span><br><span class="line"></span><br><span class="line">for i in range(13):</span><br><span class="line">    for t in dests[i]:</span><br><span class="line">        G.add_edge(i,t)</span><br><span class="line"></span><br><span class="line">#将哈密尔顿圈问题转化为哈密尔顿路问题</span><br><span class="line">G.remove_edge(9,0)</span><br><span class="line">G.add_node(&#39;t&#39;)</span><br><span class="line">G.add_edge(9,&#39;t&#39;)</span><br><span class="line">G.add_edge(&#39;t&#39;,0)</span><br><span class="line"></span><br><span class="line">tmep&#x3D;list(range(13))</span><br><span class="line">result &#x3D; hamilton(G)[1:-1]+[0]</span><br><span class="line">x&#x3D;0</span><br></pre></td></tr></table></figure>
 
 
       

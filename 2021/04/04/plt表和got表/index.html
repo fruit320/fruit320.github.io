@@ -21,15 +21,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+  <meta name="description" content="z 最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;st">
 <meta property="og:type" content="article">
 <meta property="og:title" content="plt表和got表">
 <meta property="og:url" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+<meta property="og:description" content="z 最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;st">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-04-03T16:17:11.753Z">
-<meta property="article:modified_time" content="2021-04-05T14:22:20.259Z">
+<meta property="article:modified_time" content="2021-04-05T14:51:13.104Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:22:20" itemprop="dateModified" datetime="2021-04-05T22:22:20+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-05 22:51:13" itemprop="dateModified" datetime="2021-04-05T22:51:13+08:00">2021-04-05</time>
               </span>
 
           
@@ -203,7 +203,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>z</p>
+<p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
+<p>这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server)</p>
+<p>做个简单的小实验深入理解一下plt和got表</p>
+<p>gcc test -o test.out</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">void win()&#123;</span><br><span class="line">    printf(&quot;you win\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char a[100];</span><br><span class="line">    gets(a);</span><br><span class="line">    printf(&quot;you lose\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>后面再写 。。</p>
+
     </div>
 
     
