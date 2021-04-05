@@ -29,7 +29,7 @@
 <meta property="og:description" content="基础pwn在看此博客之前，读过i春秋的linux+pwn零基础入门以及小pwn题 栈溢出ropx86rop构造exp时，x86有一个小坑 ，即call函数调用和通过plt表调用略有不同，导致栈方面的问题，call函数调用的时候默认有一个保存的EIP,即返回地址。 构造exp时，公式如下： shellcode &#x3D; padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数 x">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-27T14:35:13.392Z">
-<meta property="article:modified_time" content="2021-02-28T12:39:32.499Z">
+<meta property="article:modified_time" content="2021-04-03T16:12:49.024Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-28 20:39:32" itemprop="dateModified" datetime="2021-02-28T20:39:32+08:00">2021-02-28</time>
+                <time title="Modified: 2021-04-04 00:12:49" itemprop="dateModified" datetime="2021-04-04T00:12:49+08:00">2021-04-04</time>
               </span>
 
           
@@ -207,7 +207,7 @@
 <h4 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h4><h5 id="rop"><a href="#rop" class="headerlink" title="rop"></a>rop</h5><h6 id="x86"><a href="#x86" class="headerlink" title="x86"></a>x86</h6><p>rop构造exp时，x86有一个小坑 ，即call函数调用和通过plt表调用略有不同，导致栈方面的问题，call函数调用的时候默认有一个保存的EIP,即返回地址。</p>
 <p>构造exp时，公式如下：</p>
 <p>shellcode = padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数</p>
-<h6 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h6><p>在x64中，由于x64传参首先是通过相关寄存器，而不是直接通过栈传参，所以在构造exp时只需要找到需要的gadget即可</p>
+<h6 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h6><p>在x64中，由于linux x64传参首先是通过相关寄存器，而不是直接通过栈传参，所以在构造exp时只需要找到需要的gadget即可    一般来说，shellcode = padding + 跳转地址 + xxxx （参数）+ 返回地址</p>
 <h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5>
     </div>
 
@@ -229,7 +229,10 @@
     <a href="/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/" rel="prev" title="逆向题积累">
       <i class="fa fa-chevron-left"></i> 逆向题积累
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/" rel="next" title="plt表和got表">
+      plt表和got表 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -304,7 +307,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
