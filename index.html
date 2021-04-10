@@ -326,7 +326,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:29:31" itemprop="dateModified" datetime="2021-04-05T22:29:31+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-10 22:07:05" itemprop="dateModified" datetime="2021-04-10T22:07:05+08:00">2021-04-10</time>
               </span>
 
           
@@ -346,7 +346,9 @@
 <p>shellcode = padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数</p>
 <h6 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h6><p>在x64中，由于linux x64传参首先是通过相关寄存器，而不是直接通过栈传参，所以在构造exp时只需要找到需要的gadget即可    一般来说，shellcode = padding + 跳转地址 + xxxx （参数）+ 返回地址</p>
 <p>xman里面的level0-level5都挺有意思的（从一开始有后门 再到libc 无libc的漏洞。。。）  目前都刷过了， 一步步进阶中</p>
-<h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5>
+<h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5><h4 id="glibc-堆漏洞"><a href="#glibc-堆漏洞" class="headerlink" title="glibc  堆漏洞"></a>glibc  堆漏洞</h4><h5 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h5><h5 id="uaf"><a href="#uaf" class="headerlink" title="uaf"></a>uaf</h5><h5 id="double-free"><a href="#double-free" class="headerlink" title="double free"></a>double free</h5><h5 id="off-by-one"><a href="#off-by-one" class="headerlink" title="off-by-one"></a>off-by-one</h5><h5 id="unlink-攻击"><a href="#unlink-攻击" class="headerlink" title="unlink 攻击"></a>unlink 攻击</h5><p>在利用unlink攻击的时候，一般会有堆溢出</p>
+<p>或者uaf和double free</p>
+<h5 id="fastbin-attack"><a href="#fastbin-attack" class="headerlink" title="fastbin attack"></a>fastbin attack</h5>
       
     </div>
 

@@ -29,7 +29,7 @@
 <meta property="og:description" content="基础pwn在看此博客之前，读过i春秋的linux+pwn零基础入门以及小pwn题 栈溢出ropx86rop构造exp时，x86有一个小坑 ，即call函数调用和通过plt表调用略有不同，导致栈方面的问题，call函数调用的时候默认有一个保存的EIP,即返回地址。 构造exp时，公式如下： shellcode &#x3D; padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数 x">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-02-27T14:35:13.392Z">
-<meta property="article:modified_time" content="2021-04-05T14:29:31.811Z">
+<meta property="article:modified_time" content="2021-04-10T14:07:05.838Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:29:31" itemprop="dateModified" datetime="2021-04-05T22:29:31+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-10 22:07:05" itemprop="dateModified" datetime="2021-04-10T22:07:05+08:00">2021-04-10</time>
               </span>
 
           
@@ -209,7 +209,9 @@
 <p>shellcode = padding + 期望跳转地址 + 返回地址（EIP） +  期望跳转地址的参数</p>
 <h6 id="x64"><a href="#x64" class="headerlink" title="x64"></a>x64</h6><p>在x64中，由于linux x64传参首先是通过相关寄存器，而不是直接通过栈传参，所以在构造exp时只需要找到需要的gadget即可    一般来说，shellcode = padding + 跳转地址 + xxxx （参数）+ 返回地址</p>
 <p>xman里面的level0-level5都挺有意思的（从一开始有后门 再到libc 无libc的漏洞。。。）  目前都刷过了， 一步步进阶中</p>
-<h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5>
+<h6 id="arm"><a href="#arm" class="headerlink" title="arm"></a>arm</h6><h6 id="mips"><a href="#mips" class="headerlink" title="mips"></a>mips</h6><h5 id="stack-pivot"><a href="#stack-pivot" class="headerlink" title="stack pivot"></a>stack pivot</h5><h4 id="glibc-堆漏洞"><a href="#glibc-堆漏洞" class="headerlink" title="glibc  堆漏洞"></a>glibc  堆漏洞</h4><h5 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h5><h5 id="uaf"><a href="#uaf" class="headerlink" title="uaf"></a>uaf</h5><h5 id="double-free"><a href="#double-free" class="headerlink" title="double free"></a>double free</h5><h5 id="off-by-one"><a href="#off-by-one" class="headerlink" title="off-by-one"></a>off-by-one</h5><h5 id="unlink-攻击"><a href="#unlink-攻击" class="headerlink" title="unlink 攻击"></a>unlink 攻击</h5><p>在利用unlink攻击的时候，一般会有堆溢出</p>
+<p>或者uaf和double free</p>
+<h5 id="fastbin-attack"><a href="#fastbin-attack" class="headerlink" title="fastbin attack"></a>fastbin attack</h5>
     </div>
 
     
@@ -292,7 +294,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80pwn"><span class="nav-number">1.</span> <span class="nav-text">基础pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA"><span class="nav-number">1.1.</span> <span class="nav-text">栈溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rop"><span class="nav-number">1.1.1.</span> <span class="nav-text">rop</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x86"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#x64"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">x64</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#arm"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">arm</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mips"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">mips</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stack-pivot"><span class="nav-number">1.1.2.</span> <span class="nav-text">stack pivot</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80pwn"><span class="nav-number">1.</span> <span class="nav-text">基础pwn</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA"><span class="nav-number">1.1.</span> <span class="nav-text">栈溢出</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#rop"><span class="nav-number">1.1.1.</span> <span class="nav-text">rop</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#x86"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">x86</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#x64"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">x64</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#arm"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">arm</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#mips"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">mips</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stack-pivot"><span class="nav-number">1.1.2.</span> <span class="nav-text">stack pivot</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#glibc-%E5%A0%86%E6%BC%8F%E6%B4%9E"><span class="nav-number">1.2.</span> <span class="nav-text">glibc  堆漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A0%86%E6%BA%A2%E5%87%BA"><span class="nav-number">1.2.1.</span> <span class="nav-text">堆溢出</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#uaf"><span class="nav-number">1.2.2.</span> <span class="nav-text">uaf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#double-free"><span class="nav-number">1.2.3.</span> <span class="nav-text">double free</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#off-by-one"><span class="nav-number">1.2.4.</span> <span class="nav-text">off-by-one</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#unlink-%E6%94%BB%E5%87%BB"><span class="nav-number">1.2.5.</span> <span class="nav-text">unlink 攻击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fastbin-attack"><span class="nav-number">1.2.6.</span> <span class="nav-text">fastbin attack</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
