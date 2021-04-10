@@ -21,18 +21,22 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="z 最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;st">
+  <meta name="description" content="最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;stdi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="plt表和got表">
 <meta property="og:url" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="z 最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;st">
+<meta property="og:description" content="最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题 这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server) 做个简单的小实验深入理解一下plt和got表 gcc test -o test.out 1234567891011#include&lt;stdi">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image.png">
+<meta property="og:image" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617721215466.png">
+<meta property="og:image" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617887123243.png">
 <meta property="article:published_time" content="2021-04-03T16:17:11.753Z">
-<meta property="article:modified_time" content="2021-04-05T14:51:13.104Z">
+<meta property="article:modified_time" content="2021-04-08T13:39:25.934Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image.png">
 
 <link rel="canonical" href="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/">
 
@@ -182,7 +186,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:51:13" itemprop="dateModified" datetime="2021-04-05T22:51:13+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-08 21:39:25" itemprop="dateModified" datetime="2021-04-08T21:39:25+08:00">2021-04-08</time>
               </span>
 
           
@@ -203,14 +207,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>z</p>
-<p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
+        <p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
 <p>这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server)</p>
 <p>做个简单的小实验深入理解一下plt和got表</p>
 <p>gcc test -o test.out</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">void win()&#123;</span><br><span class="line">    printf(&quot;you win\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char a[100];</span><br><span class="line">    gets(a);</span><br><span class="line">    printf(&quot;you lose\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>后面再写 。。</p>
+<p>我们首先利用odjump 指令查看got表</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image.png" alt="Image"></p>
+<p>接着打开gdb  在gdb里面disass gets</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617721215466.png" alt="Image"></p>
+<p>disass puts</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617887123243.png" alt="Image"></p>
+<p>我们可以看到这样一个结构  一般来讲 plt表都是 </p>
+<p>jmp  xxx</p>
+<p>push  xxx</p>
+<p>jmp xxx</p>
+<p>其中第一个jmp是跳到got表 </p>
+<p>然后push一个值</p>
+<p>接着jmp xxx  ，而puts@plt  和 gets@plt中第二个jmp都是一致的  都是PLT表的开始plt[0]</p>
+<p>在plt[0]中  他做的事情是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push got[1]</span><br><span class="line">jmp **got[2]</span><br></pre></td></tr></table></figure>
+
+<p>实际上，他是在运行时重定位  找到真正的函数地址  并放在got表中  </p>
+<p>这样第一次调用该函数值时，got表中没有值 通过第二个jump找到函数地址  并放在got表中 </p>
+<p>这样当第二次调用时，got表中已有值 就只需要一个jmp就可以找到真正的函数地址</p>
+<p>那push xx就是got表中的索引  可以看到上图中gets函数是push 0x3  而puts函数是push 0x0</p>
 
     </div>
 
@@ -232,7 +254,10 @@
     <a href="/2021/02/27/pwn%E9%A2%98%E7%A7%AF%E7%B4%AF/" rel="prev" title="pwn基础总结">
       <i class="fa fa-chevron-left"></i> pwn基础总结
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/05/0ctf%20freenot/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -306,7 +331,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

@@ -148,6 +148,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/05/0ctf%20freenot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/05/0ctf%20freenot/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-05 23:02:49" itemprop="dateCreated datePublished" datetime="2021-04-05T23:02:49+08:00">2021-04-05</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -179,7 +236,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:51:13" itemprop="dateModified" datetime="2021-04-05T22:51:13+08:00">2021-04-05</time>
+                <time title="Modified: 2021-04-08 21:39:25" itemprop="dateModified" datetime="2021-04-08T21:39:25+08:00">2021-04-08</time>
               </span>
 
           
@@ -193,14 +250,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>z</p>
-<p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
+          <p>最近在刷pwn题    主要是在看堆的基础和pwn栈溢出的oj题</p>
 <p>这里面plt和got表是必须要理解的  逆向也有用  有的题把这个给混淆了  看的函数都是subxxx，但是根据plt和got表原理可以还原（那个是qwb的xx_easy_server)</p>
 <p>做个简单的小实验深入理解一下plt和got表</p>
 <p>gcc test -o test.out</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;stdio.h&gt;</span><br><span class="line">void win()&#123;</span><br><span class="line">    printf(&quot;you win\n&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    char a[100];</span><br><span class="line">    gets(a);</span><br><span class="line">    printf(&quot;you lose\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>后面再写 。。</p>
+<p>我们首先利用odjump 指令查看got表</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image.png" alt="Image"></p>
+<p>接着打开gdb  在gdb里面disass gets</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617721215466.png" alt="Image"></p>
+<p>disass puts</p>
+<p><img src="/2021/04/04/plt%E8%A1%A8%E5%92%8Cgot%E8%A1%A8/Image-1617887123243.png" alt="Image"></p>
+<p>我们可以看到这样一个结构  一般来讲 plt表都是 </p>
+<p>jmp  xxx</p>
+<p>push  xxx</p>
+<p>jmp xxx</p>
+<p>其中第一个jmp是跳到got表 </p>
+<p>然后push一个值</p>
+<p>接着jmp xxx  ，而puts@plt  和 gets@plt中第二个jmp都是一致的  都是PLT表的开始plt[0]</p>
+<p>在plt[0]中  他做的事情是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push got[1]</span><br><span class="line">jmp **got[2]</span><br></pre></td></tr></table></figure>
+
+<p>实际上，他是在运行时重定位  找到真正的函数地址  并放在got表中  </p>
+<p>这样第一次调用该函数值时，got表中没有值 通过第二个jump找到函数地址  并放在got表中 </p>
+<p>这样当第二次调用时，got表中已有值 就只需要一个jmp就可以找到真正的函数地址</p>
+<p>那push xx就是got表中的索引  可以看到上图中gets函数是push 0x3  而puts函数是push 0x0</p>
 
       
     </div>
@@ -842,95 +917,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/" class="post-title-link" itemprop="url">华为杯鲲鹏场2020 realword_mpi wp</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-12-26 23:54:06" itemprop="dateCreated datePublished" datetime="2020-12-26T23:54:06+08:00">2020-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:48:28" itemprop="dateModified" datetime="2021-04-05T22:48:28+08:00">2021-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>我晚上十点才开始看()  来不及了 先装环境   mpi 以及openmpi </p>
-<p>最后发现环境装不装无所谓  静态分析再加上单进程动调就行</p>
-<p>mpi -np 13  的意思  就是十三个进程</p>
-<p>mpi属于并行编程，没学过，完全mengb，被吓到了，</p>
-<p>后来发现只能动调一小部分   当然我只能调单进程的，多进程当然没法create_graph，</p>
-<p>逆向靠猜是没错，可是我这真啥也想不出来，所以就查了一些mpi函数，我猜应该是同步的吧 否则无解。</p>
-<img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227000414919.png" class title="1image">
-
-<p>看一开始sub_55874fe057a0 是个输出十三个数  0-13 ，顺序和输入有关，先不管具体算法 只看输入输出  只需要知道到底顺序是啥</p>
-<p>往下走 做了个create_graph 然后又从那里MPI_Neighbor_allgather，我查了一下官网函数解析，最后解析出这样：</p>
-<img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227001624024.png" class title="2image">
-
-<img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227001606088.png" class title="22image">
-
-<p>MPI_Dist_graph_create，就是创建图13个进程  13个节点，没有权重，但有邻居，所以邻居长啥样，我们看下图</p>
-<p>MPI_Neighbor_allgather：应该是向自己邻居发消息收消息，sendbuf，recvbuf</p>
-<img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227002123591.png" class title="3image">
-
-<p>这大概就是邻居了，degree表示有几个邻居</p>
-<p>后面就直接congratulation了，也就是说里面一个算法 ，逆出来就完了，关键算法在这</p>
-<img src="/2020/12/26/%E5%8D%8E%E4%B8%BA%E6%9D%AF%E9%B2%B2%E9%B9%8F%E5%9C%BA2020%20%20realword_mpi/image-20201227002248882.png" class title="4image">
-
-<p>用草稿纸模拟了一下  后来觉得应该是hamilton 回路，所以写代码就好了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">import networkx as nx</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line">def hamilton(G):</span><br><span class="line">    F &#x3D; [(G,[list(G.nodes())[0]])]</span><br><span class="line">    n &#x3D; G.number_of_nodes()</span><br><span class="line">    while F:</span><br><span class="line">        graph,path &#x3D; F.pop()</span><br><span class="line">        confs &#x3D; []</span><br><span class="line">        neighbors &#x3D; (node for node in G.neighbors(path[-1])#graph</span><br><span class="line">                     if node !&#x3D; path[-1]) #exclude self loops</span><br><span class="line">        for neighbor in neighbors:</span><br><span class="line">            conf_p &#x3D; path[:]</span><br><span class="line">            conf_p.append(neighbor)</span><br><span class="line">            if neighbor &#x3D;&#x3D; &#39;t&#39;:</span><br><span class="line">                if len(conf_p)&#x3D;&#x3D;14:</span><br><span class="line">                    print(conf_p)</span><br><span class="line">                break</span><br><span class="line">            conf_g &#x3D; nx.Graph(graph)</span><br><span class="line">            try:</span><br><span class="line">                conf_g.remove_node(path[-1])</span><br><span class="line">            except Exception as e:</span><br><span class="line">                print(str(e))</span><br><span class="line">            confs.append((conf_g,conf_p))</span><br><span class="line">        for g,p in confs:</span><br><span class="line">            if len(p)&#x3D;&#x3D;14:</span><br><span class="line">                print(p)</span><br><span class="line">                continue#return p</span><br><span class="line">            else:</span><br><span class="line">                F.append((g,p))</span><br><span class="line">    return []</span><br><span class="line"></span><br><span class="line">nodes&#x3D;list(range(13))</span><br><span class="line">G&#x3D;nx.DiGraph()</span><br><span class="line">G.add_nodes_from(nodes)</span><br><span class="line"></span><br><span class="line">dests&#x3D;[[9,5,0xB,0xC],</span><br><span class="line">[8,7,2,5,3],</span><br><span class="line">[9,0xB,6],</span><br><span class="line">[6,0xA],</span><br><span class="line">[3,7],</span><br><span class="line">[4,7,0xA,8],</span><br><span class="line">[9],</span><br><span class="line">[9,3,6],</span><br><span class="line">[9,2,4],</span><br><span class="line">[0],</span><br><span class="line">[9,6],</span><br><span class="line">[7,4,9],</span><br><span class="line">[5,7,0xB,1]]</span><br><span class="line"></span><br><span class="line">for i in range(13):</span><br><span class="line">    for t in dests[i]:</span><br><span class="line">        G.add_edge(i,t)</span><br><span class="line"></span><br><span class="line">#将哈密尔顿圈问题转化为哈密尔顿路问题</span><br><span class="line">G.remove_edge(9,0)</span><br><span class="line">G.add_node(&#39;t&#39;)</span><br><span class="line">G.add_edge(9,&#39;t&#39;)</span><br><span class="line">G.add_edge(&#39;t&#39;,0)</span><br><span class="line"></span><br><span class="line">tmep&#x3D;list(range(13))</span><br><span class="line">result &#x3D; hamilton(G)[1:-1]+[0]</span><br><span class="line">x&#x3D;0</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1002,7 +988,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
