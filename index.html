@@ -148,7 +148,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/11/%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/04/idapython%20(ida7.5)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
@@ -162,7 +162,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/11/%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">挖矿木马分析</a>
+            <a href="/2021/05/04/idapython%20(ida7.5)/" class="post-title-link" itemprop="url">Untitled</a>
         </h2>
 
         <div class="post-meta">
@@ -173,7 +173,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-04-11 17:51:36 / Modified: 17:53:03" itemprop="dateCreated datePublished" datetime="2021-04-11T17:51:36+08:00">2021-04-11</time>
+              <time title="Created: 2021-05-04 11:22:58 / Modified: 11:23:01" itemprop="dateCreated datePublished" datetime="2021-05-04T11:22:58+08:00">2021-05-04</time>
             </span>
 
           
@@ -187,7 +187,215 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>a 更新中  未完善</p>
+          <h2 id="ida7-5-里面的python3-版本下的idapython使用"><a href="#ida7-5-里面的python3-版本下的idapython使用" class="headerlink" title="ida7.5 里面的python3  版本下的idapython使用"></a>ida7.5 里面的python3  版本下的idapython使用</h2><p>idapython  一般和ida结合来进行二进制分析工作（自动化漏洞挖掘和逆向分析，如去混淆  去反调试等），可以提高安全人员分析效率。</p>
+<p>下面只介绍一些基本的使用和一些简单的小脚本</p>
+<p>后续的练习 还要多看别人写的脚本  并自己多加练习才可</p>
+<h3 id="获取当前位置的相关属性"><a href="#获取当前位置的相关属性" class="headerlink" title="获取当前位置的相关属性"></a>获取当前位置的相关属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ea &#x3D; here()  #获取当前地址</span><br><span class="line">idc.get_segm_name(ea) #段名</span><br><span class="line">idc.get_func_name(ea)  #函数名</span><br><span class="line">func &#x3D; ida_funcs.get_func(ea)   </span><br><span class="line">func.start_ea  #函数起始地址</span><br><span class="line">func.end_ea    #函数结束地址</span><br><span class="line">idc.GetDisasm(ea)  #当前位置反汇编</span><br><span class="line">idc.print_insn_mnem(ea)  #指令名称  sub mov等</span><br><span class="line">idc.next_head(ea)  #获取下一个指令地址</span><br><span class="line">idc.prev_head(ea)</span><br><span class="line">idc.next_addr(ea) #获取下一个地址</span><br><span class="line">idc.prev_addr(ea) </span><br><span class="line">idc.is_code(idc.get_full_flags(ea)) #地址是否是代码</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="遍历segment"><a href="#遍历segment" class="headerlink" title="遍历segment"></a>遍历segment</h3><p>列表中的每个项都是段的起始地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for seg in idautils.Segments():</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="遍历所有函数"><a href="#遍历所有函数" class="headerlink" title="遍历所有函数"></a>遍历所有函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for func in idautils.Functions():</span><br><span class="line">	idc.get_func_name(func)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="获取函数中的指令"><a href="#获取函数中的指令" class="headerlink" title="获取函数中的指令"></a>获取函数中的指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for func in idautils.Functions(): </span><br><span class="line">    dism_addr &#x3D; list(idautils.FuncItems(func))   #  结果为一个list格式</span><br><span class="line">    for line in dism_addr:  </span><br><span class="line">        m &#x3D; idc.print_insn_mnem(line)  # 指令名称</span><br><span class="line">        if m &#x3D;&#x3D; &#39;call&#39; or m &#x3D;&#x3D; &#39;jmp&#39;:</span><br><span class="line">            pass</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="获取操作数"><a href="#获取操作数" class="headerlink" title="获取操作数"></a>获取操作数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idc.get_operand_type(ea,n)</span><br></pre></td></tr></table></figure>
+
+
+<p>其中ea 为地址，n为索引。</p>
+<p>其返回类型有八种 + 不同的处理器 6 种</p>
+<p>详细请见idc.py 文件中  （这里只列八种）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">o_void     &#x3D; ida_ua.o_void      # No Operand                           ----------</span><br><span class="line">o_reg      &#x3D; ida_ua.o_reg       # General Register (al,ax,es,ds...)    reg</span><br><span class="line">o_mem      &#x3D; ida_ua.o_mem       # Direct Memory Reference  (DATA)      addr</span><br><span class="line">o_phrase   &#x3D; ida_ua.o_phrase    # Memory Ref [Base Reg + Index Reg]    phrase</span><br><span class="line">o_displ    &#x3D; ida_ua.o_displ     # Memory Reg [Base Reg + Index Reg + Displacement] phrase+addr</span><br><span class="line">o_imm      &#x3D; ida_ua.o_imm       # Immediate Value                      value</span><br><span class="line">o_far      &#x3D; ida_ua.o_far       # Immediate Far Address  (CODE)        addr</span><br><span class="line">o_near     &#x3D; ida_ua.o_near      # Immediate Near Address (CODE)        addr</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="交叉索引"><a href="#交叉索引" class="headerlink" title="交叉索引"></a>交叉索引</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xrefs &#x3D; idautils.CodeRefsTo(func, 1)</span><br></pre></td></tr></table></figure>
+
+
+<p>使用交叉引用定位危险函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">danger_funcs &#x3D; [&#39;strcpy&#39;, &#39;memcpy&#39;, &#39;gets&#39;, &#39;strcat&#39;, &#39;scanf&#39;, &#39;fgets&#39;]</span><br><span class="line">for func in idautils.Functions():</span><br><span class="line">    func_name &#x3D; idc.get_func_name(func)</span><br><span class="line">    for danger_func in danger_funcs:</span><br><span class="line">        if danger_func in func_name:</span><br><span class="line">            xrefs &#x3D; idautils.CodeRefsTo(func, 0)  # 第二个参数我不确定</span><br><span class="line">            for xref in xrefs:</span><br><span class="line">                if idc.print_insn_mnem(xref) &#x3D;&#x3D; &quot;call&quot;:  # check to see if this cross-reference is a function call</span><br><span class="line">                    print(&quot;  called from %s(0x%x)&quot; % (idc.get_func_name(xref), xref))</span><br><span class="line">        break</span><br></pre></td></tr></table></figure>
+
+
+<p>注意idautils.CodeRefsTo和idautils.CodeRefsFrom的区别</p>
+<h3 id="搜索binary"><a href="#搜索binary" class="headerlink" title="搜索binary"></a>搜索binary</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pattern &#x3D; &#39;55 8B EC&#39;#push ebp</span><br><span class="line">idc.find_binary(addr, idc.SEARCH_NEXT, pattern)</span><br><span class="line">idc.find_text(addr, idc.SEARCH_NEXT, 0, 0, searchstr)   #搜索字符串</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="patching"><a href="#patching" class="headerlink" title="patching"></a>patching</h3><p>补丁这个很常用  反调试  混淆等等都用得到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ida_bytes.patch_bytes(ea, value)</span><br><span class="line">ida_bytes.patch_bytes(addr, b&quot;\x90\x90\x90\x90\x90\x90\x90&quot;)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idc.set_name(ea, name, flags)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="访问原数据-转换成机器码"><a href="#访问原数据-转换成机器码" class="headerlink" title="访问原数据(转换成机器码)"></a>访问原数据(转换成机器码)</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">idc.Byte(ea)</span><br><span class="line">idc.Word(ea)</span><br><span class="line">idc.GetManyBytes(ea,size)</span><br><span class="line">for byte in idc.GetManyBytes(ea,6):</span><br><span class="line">	print(&quot;0x%X&quot; %ord(byte))</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a target="_blank" rel="noopener" href="https://www.anquanke.com/post/id/151898">https://www.anquanke.com/post/id/151898</a></p>
+<p>idapython 手册</p>
+<h3 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h3><p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-258831.htm">https://bbs.pediy.com/thread-258831.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-260127.htm">https://bbs.pediy.com/thread-260127.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/iweizime/DBGHider">https://github.com/iweizime/DBGHider</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>idapython的基本用法大概就这么多</p>
+<p>还有一张总结很到位的图<br><a target="_blank" rel="noopener" href="https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png">https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png</a></p>
+<p><img src="https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png#id=iMiFM&originHeight=180&originWidth=400&originalType=binary&status=done&style=none"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/24/cve-2018-1160/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/24/cve-2018-1160/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-24 18:42:25" itemprop="dateCreated datePublished" datetime="2021-04-24T18:42:25+08:00">2021-04-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-28 00:00:49" itemprop="dateModified" datetime="2021-04-28T00:00:49+08:00">2021-04-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="cve-2018-1160分析"><a href="#cve-2018-1160分析" class="headerlink" title="cve-2018-1160分析"></a>cve-2018-1160分析</h3><p>该bug允许未经认证的远程攻击者覆盖某些结构数据,可以控制执行流并绕过身份认证。</p>
+<h5 id="源码方面"><a href="#源码方面" class="headerlink" title="源码方面"></a>源码方面</h5><p>netatalk – AFP(Apple Filing Protocol，AFP)的实现，  源码下载在SourceForge可以找到。</p>
+<p>如果阅读源码的话，你会发现大部分的<strong>网络服务程序一般采用主进程循环监听请求的方式，当请求到来时，服务端将为其fork出一个子进程用于处理相关请求</strong>。说白了就是main里面一个while(1)始终监听，当请求到来时，会使用fork函数生成一个子进程专门处理。</p>
+<h5 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h5><p>来到main函数 /etc/afpd/main.c</p>
+<p>一开始设置了一些信号  接着进入while循环</p>
+<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224012016.png" alt="image-20210427224012016"></p>
+<p>configinit函数中 会初始化dsi结构体</p>
+<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224110986.png" alt="image-20210427224110986"></p>
+<p>初始化dsi-&gt;header</p>
+<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224414733.png" alt="image-20210427224414733"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-04-20 21:05:36" itemprop="dateCreated datePublished" datetime="2021-04-20T21:05:36+08:00">2021-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-21 20:25:04" itemprop="dateModified" datetime="2021-04-21T20:25:04+08:00">2021-04-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="linux-脏牛漏洞（dirty-cow）"><a href="#linux-脏牛漏洞（dirty-cow）" class="headerlink" title="linux 脏牛漏洞（dirty cow）"></a>linux 脏牛漏洞（dirty cow）</h3><h3 id="CVE-2016–5195"><a href="#CVE-2016–5195" class="headerlink" title="CVE-2016–5195"></a>CVE-2016–5195</h3><h4 id="复现环境："><a href="#复现环境：" class="headerlink" title="复现环境："></a>复现环境：</h4><p><a target="_blank" rel="noopener" href="https://seedsecuritylabs.org/Labs_20.04/Software/Dirty_COW/">https://seedsecuritylabs.org/Labs_20.04/Software/Dirty_COW/</a></p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>该漏洞本质属于竞态条件漏洞</p>
+<p>cow(copy on write)：</p>
+<p>在Linux系统中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后多会exec系统调用，出于效率考虑，Linux系统中引入了“写时复制”技术，也就是只有进程空间的各段的内容要发生变化时，才会将父进程的内容复制一份给子进程。</p>
+<p>详细原理看这个：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbhgyu/article/details/106245182">https://blog.csdn.net/hbhgyu/article/details/106245182</a></p>
+<p>在linux的mmap函数中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void *mmap(void *addr, size_t length, int prot, int flags,int fd, off_t offset);</span><br></pre></td></tr></table></figure>
+
+<p>该函数的作用是分配一块内存，用参数指定起始地址、内存大小、权限等。在flags标志中，MAP_PRIVATE这个标志位设置时会触发写时拷贝（cow），**其作用就是建立一个写入时拷贝的私有映射，内存区域的写入不会影响原文件，因此如果有别的进程在用这个文件，本进程在内存区域的改变只会影响COW的那个页而不影响这个文件)**。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;int madvise(void *addr, size_t length, int advice);&#96;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数的作用是告诉内核<code>addr,addr+len</code>这段区域的映射的内存或者共享内存的使用情况，方便内核以合适方式对其处理，<code>MADV_DONTNEED</code>这个表示接下来不再使用这块内存区域，内核可以释放它。</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><p>上面的实验环境上有</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dirtycow/dirtycow.github.io/blob/master/dirtyc0w.c">https://github.com/dirtycow/dirtycow.github.io/blob/master/dirtyc0w.c</a></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>打进内网后  可以用来linux提权   提取su超级权限</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbhgyu/article/details/106245182">https://blog.csdn.net/hbhgyu/article/details/106245182</a></p>
 
       
     </div>
@@ -747,168 +955,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/leetcode239%20/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/02/leetcode239%20/" class="post-title-link" itemprop="url">leetcode 239 滑动窗口最大值</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-02 23:08:38" itemprop="dateCreated datePublished" datetime="2021-01-02T23:08:38+08:00">2021-01-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-03 13:35:25" itemprop="dateModified" datetime="2021-01-03T13:35:25+08:00">2021-01-03</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>不会优化 ，不记得优先队列了，所以想不出来优化点</p>
-<p>方法一（利用优先队列进行优化）</p>
-<p>这里求最大值可以用优先队列进行优化</p>
-<p>出入队列复杂度为logn</p>
-<table>
-<thead>
-<tr>
-<th>底层机构</th>
-<th>入队</th>
-<th>出队（拿出最大元素）</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>普通线性结构</td>
-<td>O(1)</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>顺序线性结构</td>
-<td>O(n)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>堆</td>
-<td>O(logn)</td>
-<td>O(logn)</td>
-</tr>
-</tbody></table>
-<p>利用优先队列，进行优化   O(nlogn)</p>
-<p>方法二</p>
-<p>利用双向队列进行优化，可以同时弹出队首和队尾</p>
-<p>当滑动窗口向右移动时，我们需要把一个新的元素放入队列中。为了保持队列的性质，我们会不断地将新的元素与队尾的元素相比较，如果前者大于等于后者，那么队尾的元素就可以被永久地移除，我们将其弹出队列。我们需要不断地进行此项操作，直到队列为空或者新的元素小于队尾的元素。</p>
-<p>视频解析：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/">https://leetcode-cn.com/problems/sliding-window-maximum/solution/zhe-hui-yi-miao-dong-bu-liao-liao-de-hua-7fy5/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/" class="post-title-link" itemprop="url">leetcode 389 找不同</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2021-01-01 22:36:28 / Modified: 22:41:21" itemprop="dateCreated datePublished" datetime="2021-01-01T22:36:28+08:00">2021-01-01</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>这道题很简单，但是我好像只想到了第一种方法。。。。。。。。。</p>
-<p>但是其他解法需要记一下  大佬说经常用</p>
-<p>1）方法一：计数<br>首先遍历字符串 ss，对其中的每个字符都将计数值加 11；然后遍历字符串 tt，对其中的每个字符都将计数值减 11。当发现某个字符计数值为负数时，说明该字符在字符串 tt 中出现的次数大于在字符串 ss 中出现的次数，因此该字符为被添加的字符。</p>
-<p>2）方法二：求和<br>将字符串 s中每个字符的 ASCII 码的值求和，再对字符串t中的每个字符的asc2码求和，结果为二者差值。</p>
-<p>3）位运算</p>
-<p>逐个异或  求得最终结果。</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-difference/solution/zhao-bu-tong-by-leetcode-solution-mtqf/">https://leetcode-cn.com/problems/find-the-difference/solution/zhao-bu-tong-by-leetcode-solution-mtqf/</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -980,7 +1026,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

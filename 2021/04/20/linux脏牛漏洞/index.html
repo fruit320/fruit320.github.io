@@ -21,20 +21,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="a 更新中  未完善">
+  <meta name="description" content="linux 脏牛漏洞（dirty cow）CVE-2016–5195复现环境：https:&#x2F;&#x2F;seedsecuritylabs.org&#x2F;Labs_20.04&#x2F;Software&#x2F;Dirty_COW&#x2F; 原理：该漏洞本质属于竞态条件漏洞 cow(copy on write)： 在Linux系统中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后多会exec系统调用，出于效率考虑，Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="挖矿木马分析">
-<meta property="og:url" content="http://example.com/2021/04/11/%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/index.html">
+<meta property="og:title" content="Fruit&#39;s Blogs">
+<meta property="og:url" content="http://example.com/2021/04/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="a 更新中  未完善">
+<meta property="og:description" content="linux 脏牛漏洞（dirty cow）CVE-2016–5195复现环境：https:&#x2F;&#x2F;seedsecuritylabs.org&#x2F;Labs_20.04&#x2F;Software&#x2F;Dirty_COW&#x2F; 原理：该漏洞本质属于竞态条件漏洞 cow(copy on write)： 在Linux系统中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后多会exec系统调用，出于效率考虑，Linux">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-04-11T09:51:36.128Z">
-<meta property="article:modified_time" content="2021-04-11T09:53:03.938Z">
+<meta property="article:published_time" content="2021-04-20T13:05:36.351Z">
+<meta property="article:modified_time" content="2021-04-21T12:25:04.678Z">
 <meta property="article:author" content="fruit">
-<meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/04/11/%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/">
+<link rel="canonical" href="http://example.com/2021/04/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>挖矿木马分析 | Fruit's Blogs</title>
+  <title> | Fruit's Blogs</title>
   
 
 
@@ -152,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/11/%E6%8C%96%E7%9F%BF%E6%9C%A8%E9%A9%AC%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/20/linux%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
@@ -165,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          挖矿木马分析
+          
         </h1>
 
         <div class="post-meta">
@@ -174,10 +173,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-04-11 17:51:36 / Modified: 17:53:03" itemprop="dateCreated datePublished" datetime="2021-04-11T17:51:36+08:00">2021-04-11</time>
+              <time title="Created: 2021-04-20 21:05:36" itemprop="dateCreated datePublished" datetime="2021-04-20T21:05:36+08:00">2021-04-20</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-21 20:25:04" itemprop="dateModified" datetime="2021-04-21T20:25:04+08:00">2021-04-21</time>
+              </span>
 
           
             <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
@@ -197,7 +202,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>a 更新中  未完善</p>
+        <h3 id="linux-脏牛漏洞（dirty-cow）"><a href="#linux-脏牛漏洞（dirty-cow）" class="headerlink" title="linux 脏牛漏洞（dirty cow）"></a>linux 脏牛漏洞（dirty cow）</h3><h3 id="CVE-2016–5195"><a href="#CVE-2016–5195" class="headerlink" title="CVE-2016–5195"></a>CVE-2016–5195</h3><h4 id="复现环境："><a href="#复现环境：" class="headerlink" title="复现环境："></a>复现环境：</h4><p><a target="_blank" rel="noopener" href="https://seedsecuritylabs.org/Labs_20.04/Software/Dirty_COW/">https://seedsecuritylabs.org/Labs_20.04/Software/Dirty_COW/</a></p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><p>该漏洞本质属于竞态条件漏洞</p>
+<p>cow(copy on write)：</p>
+<p>在Linux系统中，fork()会产生一个和父进程完全相同的子进程，但子进程在此后多会exec系统调用，出于效率考虑，Linux系统中引入了“写时复制”技术，也就是只有进程空间的各段的内容要发生变化时，才会将父进程的内容复制一份给子进程。</p>
+<p>详细原理看这个：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbhgyu/article/details/106245182">https://blog.csdn.net/hbhgyu/article/details/106245182</a></p>
+<p>在linux的mmap函数中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void *mmap(void *addr, size_t length, int prot, int flags,int fd, off_t offset);</span><br></pre></td></tr></table></figure>
+
+<p>该函数的作用是分配一块内存，用参数指定起始地址、内存大小、权限等。在flags标志中，MAP_PRIVATE这个标志位设置时会触发写时拷贝（cow），**其作用就是建立一个写入时拷贝的私有映射，内存区域的写入不会影响原文件，因此如果有别的进程在用这个文件，本进程在内存区域的改变只会影响COW的那个页而不影响这个文件)**。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#96;int madvise(void *addr, size_t length, int advice);&#96;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数的作用是告诉内核<code>addr,addr+len</code>这段区域的映射的内存或者共享内存的使用情况，方便内核以合适方式对其处理，<code>MADV_DONTNEED</code>这个表示接下来不再使用这块内存区域，内核可以释放它。</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><p>上面的实验环境上有</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/dirtycow/dirtycow.github.io/blob/master/dirtyc0w.c">https://github.com/dirtycow/dirtycow.github.io/blob/master/dirtyc0w.c</a></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>打进内网后  可以用来linux提权   提取su超级权限</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hbhgyu/article/details/106245182">https://blog.csdn.net/hbhgyu/article/details/106245182</a></p>
 
     </div>
 
@@ -206,9 +227,6 @@
     
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
-          </div>
 
         
 
@@ -219,7 +237,10 @@
     <a href="/2021/04/05/0ctf%20freenot/" rel="prev" title="">
       <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/24/cve-2018-1160/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -278,6 +299,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-%E8%84%8F%E7%89%9B%E6%BC%8F%E6%B4%9E%EF%BC%88dirty-cow%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">linux 脏牛漏洞（dirty cow）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CVE-2016%E2%80%935195"><span class="nav-number">2.</span> <span class="nav-text">CVE-2016–5195</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0%E7%8E%AF%E5%A2%83%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">复现环境：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exp"><span class="nav-number">2.3.</span> <span class="nav-text">exp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.5.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -293,7 +315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
