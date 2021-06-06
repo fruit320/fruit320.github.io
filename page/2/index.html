@@ -148,6 +148,329 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/" class="post-title-link" itemprop="url">逆向题积累</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-16 13:09:47" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:47+08:00">2021-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-04-05 22:47:26" itemprop="dateModified" datetime="2021-04-05T22:47:26+08:00">2021-04-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。</p>
+<h5 id="2020justctf—–debug-me-if-you-can-RE"><a href="#2020justctf—–debug-me-if-you-can-RE" class="headerlink" title="2020justctf—–debug_me_if_you_can-RE"></a>2020justctf—–debug_me_if_you_can-RE</h5><p>涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用</p>
+<p>详细wp:<a target="_blank" rel="noopener" href="https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process">https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process</a></p>
+<h5 id="2020第五空间—-ManageCode"><a href="#2020第五空间—-ManageCode" class="headerlink" title="2020第五空间—-ManageCode"></a>2020第五空间—-ManageCode</h5><p>c#  根据dnspy偏移信息在ida中找到关键位置  并进行逆向</p>
+<h5 id="2020dragonctf—-RetroZeit"><a href="#2020dragonctf—-RetroZeit" class="headerlink" title="2020dragonctf—-RetroZeit"></a>2020dragonctf—-RetroZeit</h5><p>新平台下的逆向  用grida看的   其实算法很简单 感觉考察的还是快速学习能力和读汇编能力</p>
+<p>逆向用到mc680000指令集</p>
+<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-88912.htm">https://bbs.pediy.com/thread-88912.htm</a></p>
+<p><a target="_blank" rel="noopener" href="https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf">https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf</a></p>
+<h5 id="go语言逆向"><a href="#go语言逆向" class="headerlink" title="go语言逆向"></a>go语言逆向</h5><p>很多题都是用go语言写的 ，github有个脚本加载一下，后面逆向就和原来差不多，具体题目就没记录。</p>
+<h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
+<p>安卓和mips的逆向还需多加练习（未带完善）</p>
+<h5 id="mips逆向及环境搭建"><a href="#mips逆向及环境搭建" class="headerlink" title="mips逆向及环境搭建"></a>mips逆向及环境搭建</h5><p>qemu是个神器</p>
+<p>里面有各种架构的模拟  arm mips riscv</p>
+<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的可执行文件</p>
+<p>-g 参数绑定端口</p>
+<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个，但需要下载mips-linux-gnu）</p>
+<p>ida 7.5 可以直接动态调试  万能的f5</p>
+<p>qemu-mips-static -L /usr/mips-linux-gnu/ -g 12345 re</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/unity3d/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/16/unity3d/" class="post-title-link" itemprop="url">unity3d逆向简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-16 13:09:24" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:24+08:00">2021-02-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-02-27 22:53:42" itemprop="dateModified" datetime="2021-02-27T22:53:42+08:00">2021-02-27</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>简单介绍一下unity游戏逆向</p>
+<p>从基本开始</p>
+<p>assemble_csharp.dll   存放游戏主逻辑</p>
+<p>global-metadata.dat 存放字符串</p>
+<p>使用i2lcppdumper进行一个dumper</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Perfare/Il2CppDumper">Il2CppDumper</a>成功运行后  会生成 dump.cs   script.json  stringliteral.json  dummydll（文件夹）</p>
+<p>其中dump.cs包含了反编译出的C#类定义以及在so文件中对应的偏移地址</p>
+<p>stringliteral.json包含了so文件中的字符串常量以及对应的偏移地址</p>
+<p>我们用dnspy 打开assemble_csharp.dll 可以发现没有逻辑  只能看到偏移量  像这样：</p>
+<p><img src="/2021/02/16/unity3d/image-20210220151112560.png" alt="image-20210220151112560"></p>
+<p>我们可以看到rva  offset 和va然后去定位 （2020第五空间re的一道题就是这么定位的我记得，当时太菜不懂还）</p>
+<p>用ida打开   使用ida_struct脚本 就可以看得差不多了</p>
+<p>这篇文章详细介绍了变量反编译后的形态，比如如何去找静态变量。<a target="_blank" rel="noopener" href="https://www.perfare.net/1408.html">https://www.perfare.net/1408.html</a></p>
+<p>后面的有点复杂 不太好说  不过很有意思。。不过基本的就这些  </p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.touuki.com/archives/153">https://blog.touuki.com/archives/153</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/10/%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/10/%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">学习计划</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-10 23:42:59" itemprop="dateCreated datePublished" datetime="2021-01-10T23:42:59+08:00">2021-01-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-05 22:29:09" itemprop="dateModified" datetime="2021-05-05T22:29:09+08:00">2021-05-05</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="最近的学习"><a href="#最近的学习" class="headerlink" title="最近的学习"></a>最近的学习</h3><p>每日一题leetcode  会写感悟和技巧（和师兄还有同届的同学交流一下，目前leetcode不怎么刷了 ，还是冲二进制岗位吧。。朋友是说，刷leetcode分散精力，人的精力是有限的，最好专注一个，嗯，我觉得确实。。。）</p>
+<p>最近一直看一些视频  补充基础  我等着视频看完了  会手写进行ctf训练。</p>
+<h3 id="关于ctf"><a href="#关于ctf" class="headerlink" title="关于ctf"></a>关于ctf</h3><p>要求1：逆向有些题型还不会  尤其是安卓 和mips</p>
+<p>其实x86的回看以后  其他的需要照着指令集  基本都是一个套路</p>
+<p>定位到关键点  好好读  耐心点。 （mips  ida7.5 环境搭好  就完事了  arm一样可以f5  可能就是mips和arm对应的指令集不熟练  我猜今年题是不是都会出riscv架构的  毕竟mips老大说不玩了。。）</p>
+<p>要求2：会pwn的签到  （太难的估计学不下来，一定学的下来  冲丫）<del>栈溢出会一些</del>  <u><del>堆目前不会</del></u>会了 会了 都能摸题了   现在就是积累  复现经典cve</p>
+<p>pwn在刷栈题  补堆的基础   目前堆看了一半，得慢慢啃，一遍一遍地啃   长亭科技和angelboy都有堆的视频  学习中</p>
+<p>（web就算了  web 没有开发那一套我理解不透彻  只能做个脚本小子  估计没得玩  而且我的确学二进制更快一些。）</p>
+<p>后渗透也很有意思</p>
+<h3 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h3><p>是要学着手写一些。。  有个小项目  一直没写懒  没空。。。有空的时候都看pwn了。。。</p>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>我觉得我现在啃源码的功力还可以  亟待提升  可以啃啃</p>
+<p>一般是看大体架构 然后啃细节</p>
+<h3 id="新的任务"><a href="#新的任务" class="headerlink" title="新的任务"></a>新的任务</h3><p>就我目前的水平，一般应对大赛ctf的逆向中等题以上的水平，二十以上能出的我基本也可以，十解以内就够呛了，   如果再深入 一个是刷题能提升 不过实战感觉就是内核和游戏逆向   不太懂 <del>现在恶意代码不都是玩沙箱吗？？？</del></p>
+<p>对了idapython 我也写不太好  但不知道如何提升。。。。（<del>看idapython手册？？？ida7.5的又有变动）</del>  看完了  写个基本的介绍 积累脚本中</p>
+<p>但是目前打算做pwn题  如果能打进线下赛 做pwn题最好了  毕竟逆向线下没人疼没人爱</p>
+<p>要引入实战方面  </p>
+<p>一个打算做安卓或iot的网络协议的分析实战（分析一两个就够了吧）</p>
+<p>一个是复现iot漏洞和近期比较大的漏洞 比如之前linux那个超级提权堆溢出漏洞。。（看了原理还没复现）</p>
+<p>这实战方面打算在五月份启动 <del>马上jarvisoj就快刷完了</del>刷完了~  然后就是tw的低分题（刷了几道  tw挺难刷的  作为一个还算可以的逆向手  如果逆不懂是不是贼尴尬, 我怎么可能逆不懂？？？）</p>
+<h3 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h3><p>代码编写的技巧亟待提升 </p>
+<p>毕竟安全岗位太少了    我去安全开发的概率大一些。。（那是之前的犹豫不定）</p>
+<p>而且算法和数据结构真的挺重要</p>
+<p>我一直觉得安全和开发不分家。</p>
+<p><del>每日一题训练中</del>  很久不刷了   太难的我也不会  简单题 能秒吧。。中等题要看数据结构。。。</p>
+<p>目前不刷了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/leetcode123%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/09/leetcode123%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A83/" class="post-title-link" itemprop="url">leetcode 123 买卖股票3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-01-09 16:36:18" itemprop="dateCreated datePublished" datetime="2021-01-09T16:36:18+08:00">2021-01-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-10 23:20:15" itemprop="dateModified" datetime="2021-01-10T23:20:15+08:00">2021-01-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天这道题是困难 果然不会解。。。</p>
+<p>最近基金一直涨，但想骗我买股票，可基金香  股票还是算了   。。。。。</p>
+<p>考虑到动态规划了  考虑到应该是状态转移了  但是真的没想到会有这么多状态。。。</p>
+<p>一共五种状态  详细解析在这：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/123-mai-mai-gu-piao-de-zui-jia-shi-ji-ii-zfh9/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/123-mai-mai-gu-piao-de-zui-jia-shi-ji-ii-zfh9/</a></p>
+<p>一天一共就有五个状态，<br>0. 没有操作</p>
+<p>第一次买入<br>第一次卖出<br>第二次买入<br>第二次卖出<br>dp[i][j]中 i表示第i天，j为 [0 - 4] 五个状态，dp[i][j]表示第i天状态j所剩最大现金。</p>
+<p>最后代码如下：（想到最近刷过的题 ：动态规划 贪心  dfs bfs   链表操作   双向队列。。。。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n &#x3D; prices.size();</span><br><span class="line">        if(n&#x3D;&#x3D;1)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(5));</span><br><span class="line">        dp[0][0] &#x3D; 0;</span><br><span class="line">        dp[0][1] &#x3D; -prices[0];</span><br><span class="line">        dp[0][2] &#x3D; 0;</span><br><span class="line">        dp[0][3] &#x3D; -prices[0];</span><br><span class="line">        dp[0][4] &#x3D; 0;</span><br><span class="line">        for(int i &#x3D;1;i&lt;n;i++)&#123;</span><br><span class="line">            dp[i][0] &#x3D; dp[i-1][0];</span><br><span class="line">            dp[i][1] &#x3D; max(dp[i-1][0]-prices[i], dp[i-1][1]);</span><br><span class="line">            dp[i][2] &#x3D; max(dp[i-1][1] + prices[i], dp[i-1][2]);</span><br><span class="line">            dp[i][3] &#x3D; max(dp[i-1][2]-prices[i], dp[i-1][3]);</span><br><span class="line">            dp[i][4] &#x3D; max(dp[i-1][3] + prices[i], dp[i-1][4]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][4];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/02/leetcode239%20/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -597,326 +920,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/14/1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/14/1/" class="post-title-link" itemprop="url">1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-14 22:50:01" itemprop="dateCreated datePublished" datetime="2020-11-14T22:50:01+08:00">2020-11-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-26 23:51:01" itemprop="dateModified" datetime="2020-12-26T23:51:01+08:00">2020-12-26</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="说点事"><a href="#说点事" class="headerlink" title="说点事"></a>说点事</h3><p>今天挺难受的，想去北极看太阳 ，现在，北极点是极夜，但是北极圈内有太阳，但是我不知道什么时候能看到。<br>人总要追求吧。</p>
-<p>我基本释怀了，谈恋爱这种东西，还是等工作再说吧。有些路，该走还是要走的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/09/%E5%8F%8D%E7%BC%96%E8%AF%91python%E6%89%93%E5%8C%85exe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/09/%E5%8F%8D%E7%BC%96%E8%AF%91python%E6%89%93%E5%8C%85exe/" class="post-title-link" itemprop="url">反编译  python打包的exe</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-09 20:02:12" itemprop="dateCreated datePublished" datetime="2020-11-09T20:02:12+08:00">2020-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-10 23:26:37" itemprop="dateModified" datetime="2021-01-10T23:26:37+08:00">2021-01-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="反编译-python打包的exe"><a href="#反编译-python打包的exe" class="headerlink" title="反编译  python打包的exe"></a>反编译  python打包的exe</h1><h4 id="工具："><a href="#工具：" class="headerlink" title="工具："></a>工具：</h4><p>pyinstxtrator.py</p>
-<p>在线反编译工具：<a target="_blank" rel="noopener" href="https://www.toolnb.com/tools/pyc.html">https://www.toolnb.com/tools/pyc.html</a></p>
-<p>winhex</p>
-<p>winhex添加字节方法：</p>
-<p>右键edit</p>
-<p>然后选择paste zero bytes   就好了</p>
-<p>补充一下winhex还有很多神奇的地方 可以直接数据异或操作</p>
-<h4 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h4><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9f35a6f7ba05">https://www.jianshu.com/p/9f35a6f7ba05</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/08/ida7.0%20+%20%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/08/ida7.0%20+%20%E5%A4%9C%E7%A5%9E%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%8A%A8%E6%80%81%E8%B0%83%E8%AF%95apk/" class="post-title-link" itemprop="url">ida7.0 + 夜神模拟器动态调试apk</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-08 22:54:22" itemprop="dateCreated datePublished" datetime="2020-11-08T22:54:22+08:00">2020-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-16 23:03:24" itemprop="dateModified" datetime="2020-11-16T23:03:24+08:00">2020-11-16</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="ida7-0-夜神模拟器动态调试apk"><a href="#ida7-0-夜神模拟器动态调试apk" class="headerlink" title="ida7.0 + 夜神模拟器动态调试apk"></a>ida7.0 + 夜神模拟器动态调试apk</h1><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>1）夜神模拟器</p>
-<p>2）adb 下载  及环境变量配置</p>
-<p>3）ida7.0准备</p>
-<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><p>1）apk是一个zip文件  改成后缀.zip   查看.so 文件  下面介绍如何调试.so文件</p>
-<p>2）ida打开  打开夜神模拟器</p>
-<p>一般都是x86架构的模拟器 </p>
-<p>下面指令可以查看模拟器架构</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell getprop ro.product.cpu.abi</span><br></pre></td></tr></table></figure>
-
-<p>3）找到ida中的ida  android_server_x86  android_server 等文件</p>
-<p>4）打开cmd.exe 输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb connect 127.0.0.1:62001</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb push xxxxx   &#x2F;data&#x2F;local&#x2F;tmp</span><br><span class="line">adb shell  #进入shell</span><br><span class="line">su   #切换到root模式</span><br><span class="line">cd &#x2F;data&#x2F;local&#x2F;tmp</span><br><span class="line">chomd 777 xxxx #赋值权限</span><br></pre></td></tr></table></figure>
-
-<p>5）模拟器安装apk   并打开</p>
-<p>6）在shell中输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;android_server_x86</span><br></pre></td></tr></table></figure>
-
-<p>另开一个cmd.exe  输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb forward tcp:23946 tcp:23946</span><br></pre></td></tr></table></figure>
-
-<p>7）在ida中配置remote linux debugger</p>
-<p>127.0.0.1 23946</p>
-<p>点击debugger  –&gt; attach  to  process  –&gt;选择包名</p>
-<p>8）ctrl + s  转到对应模块找到断点函数  可以调试了</p>
-<h4 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h4><p>后面打算出一篇真机调试    这样调试arm会比较方便。</p>
-<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p>1）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38677814/article/details/94835852">https://blog.csdn.net/qq_38677814/article/details/94835852</a></p>
-<p>2）<a target="_blank" rel="noopener" href="https://www.dllhook.com/post/208.html">https://www.dllhook.com/post/208.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/02/%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/02/%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">工具集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-02 22:51:28" itemprop="dateCreated datePublished" datetime="2020-11-02T22:51:28+08:00">2020-11-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:26:20" itemprop="dateModified" datetime="2021-04-05T22:26:20+08:00">2021-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="ctf-工具（持续更新）"><a href="#ctf-工具（持续更新）" class="headerlink" title="ctf  工具（持续更新）"></a>ctf  工具（持续更新）</h2><h5 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h5><p>1） ida /  OD  /  Windbg（一般调试驱动吧。） / X64dbg</p>
-<p>2） resource hacker  （一般mfc用  找控件ID）</p>
-<p>3）cheat engine （官网下载   然后有个汉化包可以用）</p>
-<p>cheat engine 可以由于它的veh debugger可以过一些反调试  我记得腾讯xx题就可以过  （）  </p>
-<p>4） DIE   （查二进制文件的位数之类的，有无壳）</p>
-<p>5）PCHunter</p>
-<h5 id="misc"><a href="#misc" class="headerlink" title="misc"></a>misc</h5><p>1）advanced archive password recovery(zip 爆破  windows)</p>
-<p>2）aircrack-ng  无线流量包分析  </p>
-<p>3）一个密码生成的小工具 crunch（kali linux自带)</p>
-<p>4）winhex   必备。。</p>
-<p>misc还是推荐kali吧 自带一堆工具 免去安装中的各种问题</p>
-<h5 id="web"><a href="#web" class="headerlink" title="web"></a>web</h5><ol>
-<li><p>  burpsuite</p>
-</li>
-<li><p>  菜刀</p>
-</li>
-</ol>
-<h5 id="pwn"><a href="#pwn" class="headerlink" title="pwn"></a>pwn</h5><p>1）pwntools 不用说了吧   </p>
-<p>2）ropgadget</p>
-<p>3）pwndbg</p>
-<p>3）环境用的giantbranch  懒得自己搭建   还有kali   一起用  互帮互助。。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -984,7 +991,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

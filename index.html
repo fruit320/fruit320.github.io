@@ -148,6 +148,263 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/glibc%E4%BD%8E%E7%89%88%E6%9C%AC%E5%88%B0%E9%AB%98%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/06/glibc%E4%BD%8E%E7%89%88%E6%9C%AC%E5%88%B0%E9%AB%98%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/" class="post-title-link" itemprop="url">glibc低版本到高版本切换</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-06 12:33:17 / Modified: 12:44:56" itemprop="dateCreated datePublished" datetime="2021-06-06T12:33:17+08:00">2021-06-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>环境折腾了好久  所以记录一下</p>
+<p>题目涉及到glibc 2.29 由于我这个虚拟机是glibc2.23  所以需要重新弄一下动态链接库</p>
+<p>原本是管学长要了一个glibc的各个版本的压缩包</p>
+<p>解压配置了以后发现没有符号表  导致pwndbg的部分功能用不了</p>
+<p>所以最后改成了glibc-all-in-one 里面有详细的下载教程  并且下载后里面有一个隐藏文件夹.debug 里面有符号表</p>
+<p>下载patchelf</p>
+<p>改路径的时候要写绝对路径</p>
+<p>最后在pwntools里面加载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env&#x3D;&#123;&quot;LD_PRELOAD&quot;:&quot;&#x2F;home&#x2F;giantbranch&#x2F;Desktop&#x2F;glibc-all-in-one-master&#x2F;libs&#x2F;2.29-0ubuntu2_amd64&#x2F;libc-2.29.so&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>其他高版本同。可以开心的pwn了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/23/fuzzing%20book%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/23/fuzzing%20book%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">fuzzing book读书笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-23 23:16:15" itemprop="dateCreated datePublished" datetime="2021-05-23T23:16:15+08:00">2021-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-24 15:28:37" itemprop="dateModified" datetime="2021-05-24T15:28:37+08:00">2021-05-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="fuzzing-architecture"><a href="#fuzzing-architecture" class="headerlink" title="fuzzing architecture"></a>fuzzing architecture</h4><p>runner classes</p>
+<p>fuzzer classes</p>
+<p>code coverage</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/08/Untitled/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/08/Untitled/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-08 18:55:02" itemprop="dateCreated datePublished" datetime="2021-05-08T18:55:02+08:00">2021-05-08</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/08/linux%20main%E5%87%BD%E6%95%B0%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/08/linux%20main%E5%87%BD%E6%95%B0%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">linux main函数启动过程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-05-08 18:54:37" itemprop="dateCreated datePublished" datetime="2021-05-08T18:54:37+08:00">2021-05-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-05-09 00:03:09" itemprop="dateModified" datetime="2021-05-09T00:03:09+08:00">2021-05-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/04/tw/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -179,7 +436,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-05 11:36:23" itemprop="dateModified" datetime="2021-05-05T11:36:23+08:00">2021-05-05</time>
+                <time title="Modified: 2021-06-06 23:54:04" itemprop="dateModified" datetime="2021-06-06T23:54:04+08:00">2021-06-06</time>
               </span>
 
           
@@ -198,6 +455,19 @@
 <h4 id="orw-–-tw"><a href="#orw-–-tw" class="headerlink" title="orw – tw"></a>orw – tw</h4><p>使用orw如何写shellcode  可以用pwntools的shellcraft</p>
 <h4 id="calc-–-tw"><a href="#calc-–-tw" class="headerlink" title="calc – tw"></a>calc – tw</h4><p>坑点：栈上的数据 是以有符号数存在的， 泄露的ebp在发送时被当作无符号数发送，超过了有符号数的范围，导致getshell失败， 所以将ebp减去2的32次方转化为负数， 但是相关二进制位没有改变</p>
 <h5 id="cve-2018-1060-–-tw"><a href="#cve-2018-1060-–-tw" class="headerlink" title="cve-2018-1060 – tw"></a>cve-2018-1060 – tw</h5><p>这题的alsr我没看懂怎么绕过   所以也没解出来  这题的cve原理需要阅读源码  可以提升源码阅读的功力  linux c写的  cve的原理大概懂了   很有意思的溢出  溢出点相当于在协议栈中   在处理数据包的拷贝上  是一个比赛的原题</p>
+<h4 id="3x17-–-tw"><a href="#3x17-–-tw" class="headerlink" title="3x17 – tw"></a>3x17 – tw</h4><p>这道题是一个strip程序  学到了如何在strip的条件下找到main函数  以及main函数的运行流程  这里看了《程序员自我修养》那本书的相关章节  在写wp的时候需要记得read函数不填\0  而且\n是接收的  后面需要栈迁移  </p>
+<h4 id="dubblesort-–-tw"><a href="#dubblesort-–-tw" class="headerlink" title="dubblesort – tw"></a>dubblesort – tw</h4><p>这道题溢出点很好找  选择排序  保护全开 关键是如何绕过ALSR和canary  </p>
+<p>坑点有3个</p>
+<p>1）scanf 在输入%u时  如果输入’+/-‘ 那么不会改变栈值</p>
+<p>2）如何利用栈里面的数据泄露libc 相关值</p>
+<p>3）ida里面反的ebp的相对位移有问题  (这个最坑。。。。。)</p>
+<h4 id="hacknote-–-tw"><a href="#hacknote-–-tw" class="headerlink" title="hacknote –  tw"></a>hacknote –  tw</h4><p>leak libc 覆盖systemaddr 和 一个oj的itemboard有点像    很像。。</p>
+<p>坑点：0xaa;sh;</p>
+<h4 id="silver-bullet-–-tw"><a href="#silver-bullet-–-tw" class="headerlink" title="silver_bullet – tw"></a>silver_bullet – tw</h4><p>strncat后面会自动加’\0’</p>
+<h4 id="re-alloc-–-tw"><a href="#re-alloc-–-tw" class="headerlink" title="re-alloc  – tw"></a>re-alloc  – tw</h4><p>libc2.29 之上在需要绕过tcache libc2.29 中tache double free检查<br>patchelf –replace-needed libc.so.6 ./2.29/libc.so.6 ./re-alloc关于环境配置  已经写在博客里面<br>漏洞点：realloc 函数造成的UAF 不知道本地为啥不行 但是远程可以  本地调用system但是弹不出来 </p>
+<h4 id="applestore-–-tw"><a href="#applestore-–-tw" class="headerlink" title="applestore – tw"></a>applestore – tw</h4><p>这个题很有意思 打算详细写学到了很多。购物车构造了一个双向链表<br>这个结构让我想起了unlink attack ，当然我控制不了指针 没有溢出 asprintf 函数是动态生成的内存空间没有进行释放都没有进行free 程序里所有的malloc都没有free很显然这样很不好。但是如果光靠这一点拿到shell不太可能</p>
+<p>后来发现栈可利用 从而可以实现类似于unlink attack  （简化版的）</p>
+<p>题目设计的非常有意思</p>
 
       
     </div>
@@ -645,333 +915,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/" class="post-title-link" itemprop="url">逆向题积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 13:09:47" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:47+08:00">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:47:26" itemprop="dateModified" datetime="2021-04-05T22:47:26+08:00">2021-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。</p>
-<h5 id="2020justctf—–debug-me-if-you-can-RE"><a href="#2020justctf—–debug-me-if-you-can-RE" class="headerlink" title="2020justctf—–debug_me_if_you_can-RE"></a>2020justctf—–debug_me_if_you_can-RE</h5><p>涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用</p>
-<p>详细wp:<a target="_blank" rel="noopener" href="https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process">https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process</a></p>
-<h5 id="2020第五空间—-ManageCode"><a href="#2020第五空间—-ManageCode" class="headerlink" title="2020第五空间—-ManageCode"></a>2020第五空间—-ManageCode</h5><p>c#  根据dnspy偏移信息在ida中找到关键位置  并进行逆向</p>
-<h5 id="2020dragonctf—-RetroZeit"><a href="#2020dragonctf—-RetroZeit" class="headerlink" title="2020dragonctf—-RetroZeit"></a>2020dragonctf—-RetroZeit</h5><p>新平台下的逆向  用grida看的   其实算法很简单 感觉考察的还是快速学习能力和读汇编能力</p>
-<p>逆向用到mc680000指令集</p>
-<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-88912.htm">https://bbs.pediy.com/thread-88912.htm</a></p>
-<p><a target="_blank" rel="noopener" href="https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf">https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf</a></p>
-<h5 id="go语言逆向"><a href="#go语言逆向" class="headerlink" title="go语言逆向"></a>go语言逆向</h5><p>很多题都是用go语言写的 ，github有个脚本加载一下，后面逆向就和原来差不多，具体题目就没记录。</p>
-<h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
-<p>安卓和mips的逆向还需多加练习（未带完善）</p>
-<h5 id="mips逆向及环境搭建"><a href="#mips逆向及环境搭建" class="headerlink" title="mips逆向及环境搭建"></a>mips逆向及环境搭建</h5><p>qemu是个神器</p>
-<p>里面有各种架构的模拟  arm mips riscv</p>
-<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的可执行文件</p>
-<p>-g 参数绑定端口</p>
-<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个，但需要下载mips-linux-gnu）</p>
-<p>ida 7.5 可以直接动态调试  万能的f5</p>
-<p>qemu-mips-static -L /usr/mips-linux-gnu/ -g 12345 re</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/unity3d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/unity3d/" class="post-title-link" itemprop="url">unity3d逆向简介</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 13:09:24" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:24+08:00">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-27 22:53:42" itemprop="dateModified" datetime="2021-02-27T22:53:42+08:00">2021-02-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单介绍一下unity游戏逆向</p>
-<p>从基本开始</p>
-<p>assemble_csharp.dll   存放游戏主逻辑</p>
-<p>global-metadata.dat 存放字符串</p>
-<p>使用i2lcppdumper进行一个dumper</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Perfare/Il2CppDumper">Il2CppDumper</a>成功运行后  会生成 dump.cs   script.json  stringliteral.json  dummydll（文件夹）</p>
-<p>其中dump.cs包含了反编译出的C#类定义以及在so文件中对应的偏移地址</p>
-<p>stringliteral.json包含了so文件中的字符串常量以及对应的偏移地址</p>
-<p>我们用dnspy 打开assemble_csharp.dll 可以发现没有逻辑  只能看到偏移量  像这样：</p>
-<p><img src="/2021/02/16/unity3d/image-20210220151112560.png" alt="image-20210220151112560"></p>
-<p>我们可以看到rva  offset 和va然后去定位 （2020第五空间re的一道题就是这么定位的我记得，当时太菜不懂还）</p>
-<p>用ida打开   使用ida_struct脚本 就可以看得差不多了</p>
-<p>这篇文章详细介绍了变量反编译后的形态，比如如何去找静态变量。<a target="_blank" rel="noopener" href="https://www.perfare.net/1408.html">https://www.perfare.net/1408.html</a></p>
-<p>后面的有点复杂 不太好说  不过很有意思。。不过基本的就这些  </p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.touuki.com/archives/153">https://blog.touuki.com/archives/153</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/10/%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/10/%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">学习计划</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-10 23:42:59" itemprop="dateCreated datePublished" datetime="2021-01-10T23:42:59+08:00">2021-01-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-05 11:51:38" itemprop="dateModified" datetime="2021-05-05T11:51:38+08:00">2021-05-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="最近的学习"><a href="#最近的学习" class="headerlink" title="最近的学习"></a>最近的学习</h3><p>每日一题leetcode  会写感悟和技巧（和师兄还有同届的同学交流一下，目前leetcode不怎么刷了 ，还是冲二进制岗位吧。。朋友是说，刷leetcode分散精力，人的精力是有限的，最好专注一个，嗯，我觉得确实。。。）</p>
-<p>最近一直看一些视频  补充基础  我等着视频看完了  会手写进行ctf训练。</p>
-<h3 id="关于ctf"><a href="#关于ctf" class="headerlink" title="关于ctf"></a>关于ctf</h3><p>要求1：逆向有些题型还不会  尤其是安卓 和mips</p>
-<p>其实x86的回看以后  其他的需要照着指令集  基本都是一个套路</p>
-<p>定位到关键点  好好读  耐心点。 （mips  ida7.5 环境搭好  就完事了  arm一样可以f5  可能就是mips和arm对应的指令集不熟练  我猜今年题是不是都会出riscv架构的  毕竟mips老大说不玩了。。）</p>
-<p>要求2：会pwn的签到  （太难的估计学不下来，一定学的下来  冲丫）<del>栈溢出会一些</del>  <u><del>堆目前不会</del></u>会了 会了 都能摸题了   现在就是积累  复现经典cve</p>
-<p>pwn在刷栈题  补堆的基础   目前堆看了一半，得慢慢啃，一遍一遍地啃   长亭科技和angelboy都有堆的视频  学习中</p>
-<p>（web就算了  web 没有开发那一套我理解不透彻  只能做个脚本小子  估计没得玩  而且我的确学二进制更快一些。）</p>
-<p>后渗透也很有意思</p>
-<h3 id="汇编"><a href="#汇编" class="headerlink" title="汇编"></a>汇编</h3><p>是要学着手写一些。。  有个小项目  一直没写懒  没空。。。有空的时候都看pwn了。。。</p>
-<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>我觉得我现在啃源码的功力还可以  亟待提升  可以啃啃</p>
-<p>一般是看大体架构 然后啃细节</p>
-<h3 id="新的任务"><a href="#新的任务" class="headerlink" title="新的任务"></a>新的任务</h3><p>就我目前的水平，一般应对大赛ctf的逆向中等题以上的水平，二十以上能出的我基本也可以，十解以内就够呛了，   如果再深入 一个是刷题能提升 不过实战感觉就是内核和游戏逆向   不太懂 <del>现在恶意代码不都是玩沙箱吗？？？</del></p>
-<p>对了idapython 我也写不太好  但不知道如何提升。。。。（<del>看idapython手册？？？ida7.5的又有变动）</del>  看完了  写个基本的介绍 积累脚本中</p>
-<p>但是目前打算做pwn题  如果能打进线下赛 做pwn题最好了  毕竟逆向线下没人疼没人爱</p>
-<p>要引入实战方面  </p>
-<p>一个打算做安卓或iot的网络协议的分析实战（分析一两个就够了吧）</p>
-<p>一个是复现iot漏洞和近期比较大的漏洞 比如之前linux那个超级提权堆溢出漏洞。。（看了原理还没复现）</p>
-<p>这实战方面打算在五月份启动 <del>马上jarvisoj就快刷完了</del>刷完了~  然后就是tw的低分题（刷了几道  tw挺难刷的  作为一个还算可以的逆向手  如果逆不懂是不是贼尴尬）</p>
-<h3 id="leetcode"><a href="#leetcode" class="headerlink" title="leetcode"></a>leetcode</h3><p>代码编写的技巧亟待提升 </p>
-<p>毕竟安全岗位太少了    我去安全开发的概率大一些。。（那是之前的犹豫不定）</p>
-<p>而且算法和数据结构真的挺重要</p>
-<p>我一直觉得安全和开发不分家。</p>
-<p><del>每日一题训练中</del>  很久不刷了   太难的我也不会  简单题 能秒吧。。中等题要看数据结构。。。</p>
-<p>目前不刷了</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/09/leetcode123%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/09/leetcode123%20%E4%B9%B0%E5%8D%96%E8%82%A1%E7%A5%A83/" class="post-title-link" itemprop="url">leetcode 123 买卖股票3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-01-09 16:36:18" itemprop="dateCreated datePublished" datetime="2021-01-09T16:36:18+08:00">2021-01-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-10 23:20:15" itemprop="dateModified" datetime="2021-01-10T23:20:15+08:00">2021-01-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>今天这道题是困难 果然不会解。。。</p>
-<p>最近基金一直涨，但想骗我买股票，可基金香  股票还是算了   。。。。。</p>
-<p>考虑到动态规划了  考虑到应该是状态转移了  但是真的没想到会有这么多状态。。。</p>
-<p>一共五种状态  详细解析在这：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/123-mai-mai-gu-piao-de-zui-jia-shi-ji-ii-zfh9/">https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/solution/123-mai-mai-gu-piao-de-zui-jia-shi-ji-ii-zfh9/</a></p>
-<p>一天一共就有五个状态，<br>0. 没有操作</p>
-<p>第一次买入<br>第一次卖出<br>第二次买入<br>第二次卖出<br>dp[i][j]中 i表示第i天，j为 [0 - 4] 五个状态，dp[i][j]表示第i天状态j所剩最大现金。</p>
-<p>最后代码如下：（想到最近刷过的题 ：动态规划 贪心  dfs bfs   链表操作   双向队列。。。。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxProfit(vector&lt;int&gt;&amp; prices) &#123;</span><br><span class="line">        int n &#x3D; prices.size();</span><br><span class="line">        if(n&#x3D;&#x3D;1)&#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; dp(n, vector&lt;int&gt;(5));</span><br><span class="line">        dp[0][0] &#x3D; 0;</span><br><span class="line">        dp[0][1] &#x3D; -prices[0];</span><br><span class="line">        dp[0][2] &#x3D; 0;</span><br><span class="line">        dp[0][3] &#x3D; -prices[0];</span><br><span class="line">        dp[0][4] &#x3D; 0;</span><br><span class="line">        for(int i &#x3D;1;i&lt;n;i++)&#123;</span><br><span class="line">            dp[i][0] &#x3D; dp[i-1][0];</span><br><span class="line">            dp[i][1] &#x3D; max(dp[i-1][0]-prices[i], dp[i-1][1]);</span><br><span class="line">            dp[i][2] &#x3D; max(dp[i-1][1] + prices[i], dp[i-1][2]);</span><br><span class="line">            dp[i][3] &#x3D; max(dp[i-1][2]-prices[i], dp[i-1][3]);</span><br><span class="line">            dp[i][4] &#x3D; max(dp[i-1][3] + prices[i], dp[i-1][4]);</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[n-1][4];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1039,7 +986,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
