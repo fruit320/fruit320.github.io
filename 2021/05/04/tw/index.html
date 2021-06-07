@@ -29,7 +29,7 @@
 <meta property="og:description" content="tw的题很有意思  有cve  更偏向于实战  这里只记录坑点  wp 不写 start – tw坑点：这题当时把我困住了因为checksec 是nx开启的 一时半会儿想不明白要如何做readelf -l .&#x2F;start文章里面https:&#x2F;&#x2F;medium.com&#x2F;@en3sec&#x2F;pwnable-tw-start-8db4fe02120e讲述了 checksec的bug由于没有GNU_STACK段">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-05-04T15:57:05.393Z">
-<meta property="article:modified_time" content="2021-06-06T15:54:04.259Z">
+<meta property="article:modified_time" content="2021-06-06T16:00:49.971Z">
 <meta property="article:author" content="fruit">
 <meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-06-06 23:54:04" itemprop="dateModified" datetime="2021-06-06T23:54:04+08:00">2021-06-06</time>
+                <time title="Modified: 2021-06-07 00:00:49" itemprop="dateModified" datetime="2021-06-07T00:00:49+08:00">2021-06-07</time>
               </span>
 
           
@@ -221,6 +221,7 @@
 <h4 id="applestore-–-tw"><a href="#applestore-–-tw" class="headerlink" title="applestore – tw"></a>applestore – tw</h4><p>这个题很有意思 打算详细写学到了很多。购物车构造了一个双向链表<br>这个结构让我想起了unlink attack ，当然我控制不了指针 没有溢出 asprintf 函数是动态生成的内存空间没有进行释放都没有进行free 程序里所有的malloc都没有free很显然这样很不好。但是如果光靠这一点拿到shell不太可能</p>
 <p>后来发现栈可利用 从而可以实现类似于unlink attack  （简化版的）</p>
 <p>题目设计的非常有意思</p>
+<p>tcache tear – tw</p>
 
     </div>
 
@@ -243,8 +244,8 @@
       <i class="fa fa-chevron-left"></i> ida7.5 里面的python3  版本下的idapython基本使用  && 常用函数
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/05/08/linux%20main%E5%87%BD%E6%95%B0%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/" rel="next" title="linux main函数启动过程">
-      linux main函数启动过程 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/05/23/fuzzing%20book%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" rel="next" title="fuzzing book读书笔记">
+      fuzzing book读书笔记 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -320,7 +321,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
