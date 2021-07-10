@@ -148,6 +148,63 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/10/libssh%E6%BC%8F%E6%B4%9E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/10/libssh%E6%BC%8F%E6%B4%9E/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-10 10:20:45" itemprop="dateCreated datePublished" datetime="2021-07-10T10:20:45+08:00">2021-07-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/xx_easy_server/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -889,85 +946,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/unity3d/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/unity3d/" class="post-title-link" itemprop="url">unity3d逆向简介</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 13:09:24" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:24+08:00">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-27 22:53:42" itemprop="dateModified" datetime="2021-02-27T22:53:42+08:00">2021-02-27</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单介绍一下unity游戏逆向</p>
-<p>从基本开始</p>
-<p>assemble_csharp.dll   存放游戏主逻辑</p>
-<p>global-metadata.dat 存放字符串</p>
-<p>使用i2lcppdumper进行一个dumper</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Perfare/Il2CppDumper">Il2CppDumper</a>成功运行后  会生成 dump.cs   script.json  stringliteral.json  dummydll（文件夹）</p>
-<p>其中dump.cs包含了反编译出的C#类定义以及在so文件中对应的偏移地址</p>
-<p>stringliteral.json包含了so文件中的字符串常量以及对应的偏移地址</p>
-<p>我们用dnspy 打开assemble_csharp.dll 可以发现没有逻辑  只能看到偏移量  像这样：</p>
-<p><img src="/2021/02/16/unity3d/image-20210220151112560.png" alt="image-20210220151112560"></p>
-<p>我们可以看到rva  offset 和va然后去定位 （2020第五空间re的一道题就是这么定位的我记得，当时太菜不懂还）</p>
-<p>用ida打开   使用ida_struct脚本 就可以看得差不多了</p>
-<p>这篇文章详细介绍了变量反编译后的形态，比如如何去找静态变量。<a target="_blank" rel="noopener" href="https://www.perfare.net/1408.html">https://www.perfare.net/1408.html</a></p>
-<p>后面的有点复杂 不太好说  不过很有意思。。不过基本的就这些  </p>
-<p>参考：<a target="_blank" rel="noopener" href="https://blog.touuki.com/archives/153">https://blog.touuki.com/archives/153</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1039,7 +1017,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
