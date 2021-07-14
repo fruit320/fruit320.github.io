@@ -148,6 +148,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/14/afl-fuzz-training/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/violin.jpg">
+      <meta itemprop="name" content="fruit">
+      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Fruit's Blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/07/14/afl-fuzz-training/" class="post-title-link" itemprop="url">fuzzing</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-07-14 09:34:19 / Modified: 09:35:38" itemprop="dateCreated datePublished" datetime="2021-07-14T09:34:19+08:00">2021-07-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="有源码的fuzzing（afl-training"><a href="#有源码的fuzzing（afl-training" class="headerlink" title="有源码的fuzzing（afl-training)"></a>有源码的fuzzing（afl-training)</h4><h5 id="环境构建"><a href="#环境构建" class="headerlink" title="环境构建"></a>环境构建</h5><p>apt install clang gcc llvm afl</p>
+<p>afl-fuzz使用  常规格式：</p>
+<p>afl-fuzz -i input -o out /path/to/program [params]</p>
+<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608113545886.png" alt="image-20210608113545886"></p>
+<h5 id="harness"><a href="#harness" class="headerlink" title="harness"></a>harness</h5><p>该练习中有两个测试函数：lib_echo和lib_mul</p>
+<p>测试lib_echo 编写harness  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;library.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; fixed size buffer based on assumptions about the maximum size that is likely necessary to exercise all aspects of the target function</span><br><span class="line">#define SIZE 50</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	&#x2F;&#x2F; make sure buffer is initialized to eliminate variable behaviour that isn&#39;t dependent on the input.</span><br><span class="line">	char input[SIZE] &#x3D; &#123;0&#125;;</span><br><span class="line"></span><br><span class="line">	ssize_t length;</span><br><span class="line">	length &#x3D; read(STDIN_FILENO, input, SIZE);</span><br><span class="line"></span><br><span class="line">	lib_echo(input, length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AFL_HARDEN=1 afl-clang-fast harness.c library.c -o harness</p>
+<p>afl-fuzz -i in -o out ./harness</p>
+<p>很快会发现crashes</p>
+<p>为了测试lib_mul  编写hardness</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;library.h&quot;</span><br><span class="line">int main(int argc, char* argv[])&#123;</span><br><span class="line">    if(argc &#x3D;&#x3D; 2)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">      printf(&quot;Usage: %s filename\n&quot;, argv[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="CROMU-00007"><a href="#CROMU-00007" class="headerlink" title="CROMU_00007"></a>CROMU_00007</h5><p>编译：CC=afl-clang-fast AFL_HARDEN=1   make</p>
+<p>将输入放入input文件夹中  （不用编写harness)</p>
+<p>afl-fuzz -i in -o out ./cromu_00007</p>
+<p>尝试放一个随机文件  aaaa</p>
+<p>由于AFL具有启发式算法  所以能帮我们确定这个输入格式（当然会引入时间代价）</p>
+<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608165245824.png" alt="image-20210608165245824"></p>
+<p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/107321319">https://blog.csdn.net/lady_killer9/article/details/107321319</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mykter/afl-training">https://github.com/mykter/afl-training</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/10/libssh%E6%BC%8F%E6%B4%9E/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -864,88 +947,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/violin.jpg">
-      <meta itemprop="name" content="fruit">
-      <meta itemprop="description" content="问灵十三载，等一不归人  欢迎交流：3209820155qq 添加备注：blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Fruit's Blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/16/%E9%80%86%E5%90%91%E9%A2%98%E5%BA%93%E7%A7%AF%E7%B4%AF/" class="post-title-link" itemprop="url">逆向题积累</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-02-16 13:09:47" itemprop="dateCreated datePublished" datetime="2021-02-16T13:09:47+08:00">2021-02-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-04-05 22:47:26" itemprop="dateModified" datetime="2021-04-05T22:47:26+08:00">2021-04-05</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>一道一道写wp比较麻烦，本文章列出每一道题的考察点，高质量的题汇总，慢慢的积少成多。</p>
-<h5 id="2020justctf—–debug-me-if-you-can-RE"><a href="#2020justctf—–debug-me-if-you-can-RE" class="headerlink" title="2020justctf—–debug_me_if_you_can-RE"></a>2020justctf—–debug_me_if_you_can-RE</h5><p>涉及到高级反调试技术（nanomite）  ptrace用法  以及 idapython脚本编写与使用</p>
-<p>详细wp:<a target="_blank" rel="noopener" href="https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process">https://mrt4ntr4.github.io/JustCTF-debugme/#Role-of-Father-Process</a></p>
-<h5 id="2020第五空间—-ManageCode"><a href="#2020第五空间—-ManageCode" class="headerlink" title="2020第五空间—-ManageCode"></a>2020第五空间—-ManageCode</h5><p>c#  根据dnspy偏移信息在ida中找到关键位置  并进行逆向</p>
-<h5 id="2020dragonctf—-RetroZeit"><a href="#2020dragonctf—-RetroZeit" class="headerlink" title="2020dragonctf—-RetroZeit"></a>2020dragonctf—-RetroZeit</h5><p>新平台下的逆向  用grida看的   其实算法很简单 感觉考察的还是快速学习能力和读汇编能力</p>
-<p>逆向用到mc680000指令集</p>
-<p><a target="_blank" rel="noopener" href="https://bbs.pediy.com/thread-88912.htm">https://bbs.pediy.com/thread-88912.htm</a></p>
-<p><a target="_blank" rel="noopener" href="https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf">https://web.njit.edu/~rosensta/classes/architecture/252software/code.pdf</a></p>
-<h5 id="go语言逆向"><a href="#go语言逆向" class="headerlink" title="go语言逆向"></a>go语言逆向</h5><p>很多题都是用go语言写的 ，github有个脚本加载一下，后面逆向就和原来差不多，具体题目就没记录。</p>
-<h5 id="2020强网杯—-xx-warmup-obf"><a href="#2020强网杯—-xx-warmup-obf" class="headerlink" title="2020强网杯—-xx_warmup_obf"></a>2020强网杯—-xx_warmup_obf</h5><p>这道题前面初始化的时候注册了SEH， 后面用的int 3  反调试，需要在ida中设置将信号pass application</p>
-<p>安卓和mips的逆向还需多加练习（未带完善）</p>
-<h5 id="mips逆向及环境搭建"><a href="#mips逆向及环境搭建" class="headerlink" title="mips逆向及环境搭建"></a>mips逆向及环境搭建</h5><p>qemu是个神器</p>
-<p>里面有各种架构的模拟  arm mips riscv</p>
-<p>还可以下载mips-linux-gnu  可以编译c  生成mips架构的可执行文件</p>
-<p>-g 参数绑定端口</p>
-<p>-L 指定链接库位置（因为有一次出现了no found /usr/ld.so.1 ，所以改成了这个，但需要下载mips-linux-gnu）</p>
-<p>ida 7.5 可以直接动态调试  万能的f5</p>
-<p>qemu-mips-static -L /usr/mips-linux-gnu/ -g 12345 re</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1017,7 +1018,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

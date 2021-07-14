@@ -21,20 +21,23 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="这道题很简单，但是我好像只想到了第一种方法。。。。。。。。。 但是其他解法需要记一下  大佬说经常用 1）方法一：计数首先遍历字符串 ss，对其中的每个字符都将计数值加 11；然后遍历字符串 tt，对其中的每个字符都将计数值减 11。当发现某个字符计数值为负数时，说明该字符在字符串 tt 中出现的次数大于在字符串 ss 中出现的次数，因此该字符为被添加的字符。 2）方法二：求和将字符串 s中每个字">
+  <meta name="description" content="有源码的fuzzing（afl-training)环境构建apt install clang gcc llvm afl afl-fuzz使用  常规格式： afl-fuzz -i input -o out &#x2F;path&#x2F;to&#x2F;program [params]  harness该练习中有两个测试函数：lib_echo和lib_mul 测试lib_echo 编写harness   12345678910">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode 389 找不同">
-<meta property="og:url" content="http://example.com/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/index.html">
+<meta property="og:title" content="fuzzing">
+<meta property="og:url" content="http://example.com/2021/07/14/afl-fuzz-training/index.html">
 <meta property="og:site_name" content="Fruit&#39;s Blogs">
-<meta property="og:description" content="这道题很简单，但是我好像只想到了第一种方法。。。。。。。。。 但是其他解法需要记一下  大佬说经常用 1）方法一：计数首先遍历字符串 ss，对其中的每个字符都将计数值加 11；然后遍历字符串 tt，对其中的每个字符都将计数值减 11。当发现某个字符计数值为负数时，说明该字符在字符串 tt 中出现的次数大于在字符串 ss 中出现的次数，因此该字符为被添加的字符。 2）方法二：求和将字符串 s中每个字">
+<meta property="og:description" content="有源码的fuzzing（afl-training)环境构建apt install clang gcc llvm afl afl-fuzz使用  常规格式： afl-fuzz -i input -o out &#x2F;path&#x2F;to&#x2F;program [params]  harness该练习中有两个测试函数：lib_echo和lib_mul 测试lib_echo 编写harness   12345678910">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-01-01T14:36:28.063Z">
-<meta property="article:modified_time" content="2021-01-01T14:41:21.662Z">
+<meta property="og:image" content="http://example.com/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608113545886.png">
+<meta property="og:image" content="http://example.com/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608165245824.png">
+<meta property="article:published_time" content="2021-07-14T01:34:19.345Z">
+<meta property="article:modified_time" content="2021-07-14T01:35:38.315Z">
 <meta property="article:author" content="fruit">
-<meta property="article:tag" content="刷算法-每日一题">
+<meta property="article:tag" content="二进制">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608113545886.png">
 
-<link rel="canonical" href="http://example.com/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/">
+<link rel="canonical" href="http://example.com/2021/07/14/afl-fuzz-training/">
 
 
 <script id="page-configurations">
@@ -47,7 +50,7 @@
   };
 </script>
 
-  <title>leetcode 389 找不同 | Fruit's Blogs</title>
+  <title>fuzzing | Fruit's Blogs</title>
   
 
 
@@ -152,7 +155,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/01/01/leetcode%20389%20%E6%89%BE%E4%B8%8D%E5%90%8C/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/07/14/afl-fuzz-training/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/violin.jpg">
@@ -165,7 +168,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          leetcode 389 找不同
+          fuzzing
         </h1>
 
         <div class="post-meta">
@@ -176,7 +179,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-01-01 22:36:28 / Modified: 22:41:21" itemprop="dateCreated datePublished" datetime="2021-01-01T22:36:28+08:00">2021-01-01</time>
+              <time title="Created: 2021-07-14 09:34:19 / Modified: 09:35:38" itemprop="dateCreated datePublished" datetime="2021-07-14T09:34:19+08:00">2021-07-14</time>
             </span>
 
           
@@ -197,13 +200,31 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>这道题很简单，但是我好像只想到了第一种方法。。。。。。。。。</p>
-<p>但是其他解法需要记一下  大佬说经常用</p>
-<p>1）方法一：计数<br>首先遍历字符串 ss，对其中的每个字符都将计数值加 11；然后遍历字符串 tt，对其中的每个字符都将计数值减 11。当发现某个字符计数值为负数时，说明该字符在字符串 tt 中出现的次数大于在字符串 ss 中出现的次数，因此该字符为被添加的字符。</p>
-<p>2）方法二：求和<br>将字符串 s中每个字符的 ASCII 码的值求和，再对字符串t中的每个字符的asc2码求和，结果为二者差值。</p>
-<p>3）位运算</p>
-<p>逐个异或  求得最终结果。</p>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/find-the-difference/solution/zhao-bu-tong-by-leetcode-solution-mtqf/">https://leetcode-cn.com/problems/find-the-difference/solution/zhao-bu-tong-by-leetcode-solution-mtqf/</a></p>
+        <h4 id="有源码的fuzzing（afl-training"><a href="#有源码的fuzzing（afl-training" class="headerlink" title="有源码的fuzzing（afl-training)"></a>有源码的fuzzing（afl-training)</h4><h5 id="环境构建"><a href="#环境构建" class="headerlink" title="环境构建"></a>环境构建</h5><p>apt install clang gcc llvm afl</p>
+<p>afl-fuzz使用  常规格式：</p>
+<p>afl-fuzz -i input -o out /path/to/program [params]</p>
+<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608113545886.png" alt="image-20210608113545886"></p>
+<h5 id="harness"><a href="#harness" class="headerlink" title="harness"></a>harness</h5><p>该练习中有两个测试函数：lib_echo和lib_mul</p>
+<p>测试lib_echo 编写harness  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;library.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; fixed size buffer based on assumptions about the maximum size that is likely necessary to exercise all aspects of the target function</span><br><span class="line">#define SIZE 50</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	&#x2F;&#x2F; make sure buffer is initialized to eliminate variable behaviour that isn&#39;t dependent on the input.</span><br><span class="line">	char input[SIZE] &#x3D; &#123;0&#125;;</span><br><span class="line"></span><br><span class="line">	ssize_t length;</span><br><span class="line">	length &#x3D; read(STDIN_FILENO, input, SIZE);</span><br><span class="line"></span><br><span class="line">	lib_echo(input, length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AFL_HARDEN=1 afl-clang-fast harness.c library.c -o harness</p>
+<p>afl-fuzz -i in -o out ./harness</p>
+<p>很快会发现crashes</p>
+<p>为了测试lib_mul  编写hardness</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;library.h&quot;</span><br><span class="line">int main(int argc, char* argv[])&#123;</span><br><span class="line">    if(argc &#x3D;&#x3D; 2)&#123;</span><br><span class="line">    </span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">      printf(&quot;Usage: %s filename\n&quot;, argv[0]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="CROMU-00007"><a href="#CROMU-00007" class="headerlink" title="CROMU_00007"></a>CROMU_00007</h5><p>编译：CC=afl-clang-fast AFL_HARDEN=1   make</p>
+<p>将输入放入input文件夹中  （不用编写harness)</p>
+<p>afl-fuzz -i in -o out ./cromu_00007</p>
+<p>尝试放一个随机文件  aaaa</p>
+<p>由于AFL具有启发式算法  所以能帮我们确定这个输入格式（当然会引入时间代价）</p>
+<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608165245824.png" alt="image-20210608165245824"></p>
+<p>参考文献：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/107321319">https://blog.csdn.net/lady_killer9/article/details/107321319</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/mykter/afl-training">https://github.com/mykter/afl-training</a></p>
 
     </div>
 
@@ -213,7 +234,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%88%B7%E7%AE%97%E6%B3%95-%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/" rel="tag"># 刷算法-每日一题</a>
+              <a href="/tags/%E4%BA%8C%E8%BF%9B%E5%88%B6/" rel="tag"># 二进制</a>
           </div>
 
         
@@ -222,13 +243,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/12/31/leetcode%20435%20%E6%97%A0%E9%87%8D%E5%8F%A0%E5%8C%BA%E9%97%B4/" rel="prev" title="leetcode 435 无重叠区间">
-      <i class="fa fa-chevron-left"></i> leetcode 435 无重叠区间
+    <a href="/2021/07/10/libssh%E6%BC%8F%E6%B4%9E/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/01/02/leetcode239%20/" rel="next" title="leetcode 239 滑动窗口最大值">
-      leetcode 239 滑动窗口最大值 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -287,6 +305,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E6%BA%90%E7%A0%81%E7%9A%84fuzzing%EF%BC%88afl-training"><span class="nav-number">1.</span> <span class="nav-text">有源码的fuzzing（afl-training)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%9E%84%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">环境构建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#harness"><span class="nav-number">1.2.</span> <span class="nav-text">harness</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CROMU-00007"><span class="nav-number">1.3.</span> <span class="nav-text">CROMU_00007</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
