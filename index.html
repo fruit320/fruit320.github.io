@@ -173,7 +173,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-07-14 09:34:19 / Modified: 09:35:38" itemprop="dateCreated datePublished" datetime="2021-07-14T09:34:19+08:00">2021-07-14</time>
+              <time title="Created: 2021-07-14 09:34:19 / Modified: 10:07:54" itemprop="dateCreated datePublished" datetime="2021-07-14T09:34:19+08:00">2021-07-14</time>
             </span>
 
           
@@ -190,7 +190,7 @@
           <h4 id="有源码的fuzzing（afl-training"><a href="#有源码的fuzzing（afl-training" class="headerlink" title="有源码的fuzzing（afl-training)"></a>有源码的fuzzing（afl-training)</h4><h5 id="环境构建"><a href="#环境构建" class="headerlink" title="环境构建"></a>环境构建</h5><p>apt install clang gcc llvm afl</p>
 <p>afl-fuzz使用  常规格式：</p>
 <p>afl-fuzz -i input -o out /path/to/program [params]</p>
-<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608113545886.png" alt="image-20210608113545886"></p>
+<p><img src="/2021/07/14/afl-fuzz-training/image-20210608113545886.png" alt="image-20210608113545886"></p>
 <h5 id="harness"><a href="#harness" class="headerlink" title="harness"></a>harness</h5><p>该练习中有两个测试函数：lib_echo和lib_mul</p>
 <p>测试lib_echo 编写harness  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;unistd.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">#include &quot;library.h&quot;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; fixed size buffer based on assumptions about the maximum size that is likely necessary to exercise all aspects of the target function</span><br><span class="line">#define SIZE 50</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">	&#x2F;&#x2F; make sure buffer is initialized to eliminate variable behaviour that isn&#39;t dependent on the input.</span><br><span class="line">	char input[SIZE] &#x3D; &#123;0&#125;;</span><br><span class="line"></span><br><span class="line">	ssize_t length;</span><br><span class="line">	length &#x3D; read(STDIN_FILENO, input, SIZE);</span><br><span class="line"></span><br><span class="line">	lib_echo(input, length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -208,7 +208,7 @@
 <p>afl-fuzz -i in -o out ./cromu_00007</p>
 <p>尝试放一个随机文件  aaaa</p>
 <p>由于AFL具有启发式算法  所以能帮我们确定这个输入格式（当然会引入时间代价）</p>
-<p><img src="/2021/07/14/afl-fuzz-training/afl-fuzz-training/image-20210608165245824.png" alt="image-20210608165245824"></p>
+<p><img src="/2021/07/14/afl-fuzz-training/image-20210608165245824.png" alt="image-20210608165245824"></p>
 <p>参考文献：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lady_killer9/article/details/107321319">https://blog.csdn.net/lady_killer9/article/details/107321319</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/mykter/afl-training">https://github.com/mykter/afl-training</a></p>
